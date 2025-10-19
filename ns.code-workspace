@@ -1,0 +1,147 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "root"
+    },
+    {
+      "path": "apps"
+    }
+  ],
+  "settings": {
+    "prettier.documentSelectors": ["**/*.{css,html,js,json,md,scss,ts}"],
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+    "npm.packageManager": "pnpm",
+    "editor.lightbulb.enabled": "on",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.insertSpaces": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+    },
+    "editor.rulers": [100],
+    "editor.overviewRulerBorder": true,
+    "editor.experimentalWhitespaceRendering": "font",
+    "editor.renderWhitespace": "none",
+    "eslint.validate": [
+      "javascript",
+      "typescript",
+      "json",
+      "jsonc",
+      "json5",
+      "html",
+      "css"
+    ],
+    "[css]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[html]": {
+      "editor.defaultFormatter": "Angular.ng-template",
+      "editor.formatOnSave": true
+    },
+    "[prisma]": {
+      "editor.defaultFormatter": "Prisma.prisma-insider",
+      "editor.formatOnSave": true
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[yaml]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[xml]": {
+      "editor.defaultFormatter": "redhat.vscode-xml",
+      "editor.formatOnSave": true
+    },
+    // "typescript.experimental.useTsgo": true,
+    "typescript.format.semicolons": "insert",
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "typescript.preferences.importModuleSpecifierEnding": "js",
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "javascript.preferences.importModuleSpecifier": "non-relative",
+    "javascript.preferences.importModuleSpecifierEnding": "js",
+    "html.autoClosingTags": true,
+    "html.format.indentInnerHtml": true,
+    "html.format.maxPreserveNewLines": 1,
+    "workbench.editor.labelFormat": "medium",
+    "files.watcherExclude": {
+      "**/routeTree.gen.ts": true
+    },
+    "files.readonlyInclude": {
+      "**/routeTree.gen.ts": true
+    },
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/node_modules": true,
+      "**/.nitro": true,
+      "**/.output": true,
+      "**/.tanstack": true,
+      "**/.angular": true
+    },
+    "search.exclude": {
+      "**/routeTree.gen.ts": true,
+      "**/node_modules": true,
+      "**/.nitro": true,
+      "**/.output": true,
+      "**/.tanstack": true,
+      "**/prisma/generated": true
+    },
+    "cSpell.words": [
+      "Camo",
+      "coor",
+      "Coor",
+      "customerid",
+      "dbaeumer",
+      "dotenv",
+      "labelledby",
+      "lmdb",
+      "malva",
+      "msgpackr",
+      "ngeslint",
+      "ngplugin",
+      "ngsrc",
+      "ngtemplate",
+      "Stroustrup",
+      "Tsgo",
+      "tsquery",
+      "tsvector",
+      "XLARGE",
+      "XSMALL",
+      "XXLARGE"
+    ]
+  },
+  "extensions": {
+    "recommendations": [
+      "Prisma.prisma",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint"
+    ]
+  }
+}

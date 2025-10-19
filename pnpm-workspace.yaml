@@ -1,0 +1,13 @@
+packages:
+  - apps/*
+
+onlyBuiltDependencies:
+  - "@prisma/client"
+  - "@prisma/engines"
+  - esbuild
+  - prisma
+
+publicHoistPattern:
+  - esbuild
+  - typescript
+  - typegraphql-prisma
