@@ -2,6 +2,7 @@ import css from '@eslint/css';
 import js from '@eslint/js';
 import json from '@eslint/json';
 import markdown from '@eslint/markdown';
+import fluentuiEslintPlugin from '@fluentui/eslint-plugin-react-components';
 import pluginReact from 'eslint-plugin-react';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -14,6 +15,9 @@ export default defineConfig([
   pluginReact.configs.flat.recommended,
   reactCompiler.configs.recommended,
   reactHooks.configs.flat.recommended,
+  {
+    ignores: ['**/node_modules', '**/dist', '**/temp'],
+  },
   {
     files: ['**/*.{js,mjs,ts,jsx,tsx}'],
     plugins: { js },
@@ -31,16 +35,16 @@ export default defineConfig([
   },
   {
     files: ['**/*.{js,mjs,ts,jsx,tsx}'],
-    plugins: { pluginReact },
+    plugins: { pluginReact, fluentuiEslintPlugin },
     languageOptions: {
       globals: globals.browser,
     },
-    extends: ['plugin:react/jsx-runtime'],
+    extends: ['plugin:react/recommended', 'plugin:@fluentui/react-components/recommended'],
     rules: {
       'no-restricted-imports': [
         'error',
         {
-          patterns: [{ regex: '^@mui/[^/]+$' }],
+          patterns: [{ regex: '^@fluentui/[^/]+$' }],
         },
       ],
       'no-unnecessary-use-callback': 'error',

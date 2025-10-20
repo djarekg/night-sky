@@ -20,6 +20,9 @@ importers:
       '@eslint/markdown':
         specifier: ^7.4.0
         version: 7.4.0
+      '@fluentui/eslint-plugin-react-components':
+        specifier: 0.1.2
+        version: 0.1.2(eslint@9.38.0(jiti@2.6.1))(typescript-eslint@8.46.1(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(typescript@5.9.3)
       '@types/node':
         specifier: ^24.8.1
         version: 24.8.1
@@ -111,6 +114,9 @@ importers:
       '@fluentui/react-icons':
         specifier: ^2.0.312
         version: 2.0.312(react@19.2.0)
+      '@fluentui/react-tabster':
+        specifier: 9.26.7
+        version: 9.26.7(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@react-router/node':
         specifier: ^7.9.4
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
@@ -564,6 +570,13 @@ packages:
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
+
+  '@fluentui/eslint-plugin-react-components@0.1.2':
+    resolution: {integrity: sha512-RR0En4lIy7TbAfUBe1oHq338GzWZTbYwtKw10GGhvcpGQP9C2ClJZSdQgfs8Tyh3bLf7Q4EKc1mAEI1p8CM+Eg==}
+    peerDependencies:
+      eslint: ^8.0.0
+      typescript: ^5.0.0
+      typescript-eslint: ^8.19.1
 
   '@fluentui/keyboard-keys@9.0.8':
     resolution: {integrity: sha512-iUSJUUHAyTosnXK8O2Ilbfxma+ZyZPMua5vB028Ys96z80v+LFwntoehlFsdH3rMuPsA8GaC1RE7LMezwPBPdw==}
@@ -4287,6 +4300,16 @@ snapshots:
       '@floating-ui/utils': 0.2.10
 
   '@floating-ui/utils@0.2.10': {}
+
+  '@fluentui/eslint-plugin-react-components@0.1.2(eslint@9.38.0(jiti@2.6.1))(typescript-eslint@8.46.1(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(typescript@5.9.3)':
+    dependencies:
+      '@swc/helpers': 0.5.17
+      '@typescript-eslint/utils': 8.46.1(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)
+      eslint: 9.38.0(jiti@2.6.1)
+      typescript: 5.9.3
+      typescript-eslint: 8.46.1(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)
+    transitivePeerDependencies:
+      - supports-color
 
   '@fluentui/keyboard-keys@9.0.8':
     dependencies:

@@ -33,7 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        {/* 2. Add insertion point for Fluent UI styles before the </head>. */}
+        {/* Add insertion point for Fluent UI styles before the </head>. */}
         <meta name="fluentui-insertion-point" content="fluentui-insertion-point" />
       </head>
       <body>

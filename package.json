@@ -15,6 +15,7 @@
     "@eslint/js": "^9.38.0",
     "@eslint/json": "^0.13.2",
     "@eslint/markdown": "^7.4.0",
+    "@fluentui/eslint-plugin-react-components": "0.1.2",
     "@types/node": "^24.8.1",
     "eslint": "^9.38.0",
     "eslint-plugin-react": "^7.37.5",
