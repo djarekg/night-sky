@@ -3,6 +3,7 @@ import { createProductColors } from '#prisma/seed/product-color.js';
 import { createProductInventories } from '#prisma/seed/product-inventory.js';
 import { createProductSales } from '#prisma/seed/product-sale.js';
 import { createProducts } from '#prisma/seed/product.js';
+import { reset } from '#prisma/seed/reset.js';
 import { createUserCredential } from '#prisma/seed/user-credential.js';
 import { createCustomerContacts } from './customer-contact.js';
 import { createCustomers } from './customer.js';
@@ -10,6 +11,7 @@ import { createStates } from './state.ts';
 import { createUsers } from './user.js';
 
 const load = async () => {
+  await reset(prisma);
   await createStates(prisma);
   await createUsers(prisma);
   await createUserCredential(prisma);
@@ -22,14 +24,17 @@ const load = async () => {
 };
 
 load()
-  .then(() => console.log('Seed completed'))
-  .catch(error => {
+  .then(() => {
+    console.log('Seed completed');
+  })
+  .catch((error: unknown) => {
     console.error(error);
     process.exit(1);
   })
   .finally(() => {
     // Disconnecting needs to wait at least 1 second to ensure all
     // operations are completed.
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     setTimeout(async () => {
       await prisma.$disconnect();
     }, 1000);

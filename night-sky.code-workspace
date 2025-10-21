@@ -2,11 +2,11 @@
   "folders": [
     {
       "path": ".",
-      "name": "root"
+      "name": "root",
     },
     {
-      "path": "apps"
-    }
+      "path": "apps",
+    },
   ],
   "settings": {
     // "prettier.documentSelectors": [
@@ -23,7 +23,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
       "source.fixAll": "explicit",
-      "source.organizeImports": "explicit"
+      "source.organizeImports": "explicit",
     },
     "editor.rulers": [100],
     "editor.overviewRulerBorder": true,
@@ -34,55 +34,47 @@
     "files.insertFinalNewline": true,
     "editor.insertSpaces": true,
 
-    "eslint.validate": [
-      "javascript",
-      "typescript",
-      "json",
-      "jsonc",
-      "json5",
-      "html",
-      "css"
-    ],
+    "eslint.validate": ["javascript", "typescript", "json", "jsonc", "json5", "html", "css"],
     "[css]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[json]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[jsonc]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[html]": {
-      "editor.defaultFormatter": "vscode.html-language-features"
+      "editor.defaultFormatter": "vscode.html-language-features",
     },
     "[prisma]": {
-      "editor.defaultFormatter": "Prisma.prisma"
+      "editor.defaultFormatter": "Prisma.prisma",
     },
     "[typescript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[typescriptreact]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[javascriptreact]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[yaml]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[xml]": {
-      "editor.defaultFormatter": "redhat.vscode-xml"
+      "editor.defaultFormatter": "redhat.vscode-xml",
     },
 
     // "typescript.experimental.useTsgo": true,
     "typescript.format.semicolons": "insert",
-    "javascript.preferences.importModuleSpecifier": "relative",
-    "javascript.preferences.importModuleSpecifierEnding": "index",
-    "typescript.preferences.importModuleSpecifier": "relative",
-    "typescript.preferences.importModuleSpecifierEnding": "index",
+    "javascript.preferences.importModuleSpecifier": "non-relative",
+    "javascript.preferences.importModuleSpecifierEnding": "js",
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "typescript.preferences.importModuleSpecifierEnding": "js",
 
     // "typescript.preferences.importModuleSpecifier": "non-relative",
     // "typescript.preferences.importModuleSpecifierEnding": "js",
@@ -96,10 +88,10 @@
     "html.format.maxPreserveNewLines": 1,
 
     "files.watcherExclude": {
-      "**/routeTree.gen.ts": true
+      "**/routeTree.gen.ts": true,
     },
     "files.readonlyInclude": {
-      "**/routeTree.gen.ts": true
+      "**/routeTree.gen.ts": true,
     },
     "files.exclude": {
       "**/.cache": true,
@@ -109,15 +101,15 @@
       "**/.DS_Store": true,
       "**/Thumbs.db": true,
       "**/node_modules": true,
-      "**/.react-router": true,
-      "**/.output": true
+      "**/.react-router": false,
+      "**/.output": true,
     },
     "search.exclude": {
       "**/routeTree.gen.ts": true,
       "**/.react-router": true,
       "**/node_modules": true,
       "**/.output": true,
-      "**/prisma/generated": true
+      "**/prisma/generated": true,
     },
 
     "cSpell.words": [
@@ -142,21 +134,23 @@
       "Tsgo",
       "tsquery",
       "tsvector",
+      "VITE",
       "XLARGE",
       "XSMALL",
-      "XXLARGE"
+      "XXLARGE",
     ],
 
     "workbench.editor.labelFormat": "medium",
 
     // Maximum number of requests for the chat agent - Prevents AI agents from stopping mid-session
-    "chat.agent.maxRequests": 999
+    "chat.agent.maxRequests": 999,
   },
   "extensions": {
     "recommendations": [
       "Prisma.prisma",
       "esbenp.prettier-vscode",
-      "dbaeumer.vscode-eslint"
-    ]
-  }
+      "dbaeumer.vscode-eslint",
+      "cweijan.vscode-postgresql-client2",
+    ],
+  },
 }

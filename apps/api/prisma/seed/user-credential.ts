@@ -15,7 +15,7 @@ export const createUserCredential = async (prisma: PrismaClient) => {
     },
   });
 
-  const createAdminUserCredential = () =>
+  const createAdminCredential = () =>
     prisma.userCredential.createMany({
       data: adminUserIds.map(({ id }) => ({
         id: faker.string.uuid(),
@@ -25,7 +25,7 @@ export const createUserCredential = async (prisma: PrismaClient) => {
       })),
     });
 
-  const userIds: { id: string; }[] = await prisma.user.findMany({
+  const userIds: { id: string }[] = await prisma.user.findMany({
     select: {
       id: true,
     },
@@ -36,7 +36,7 @@ export const createUserCredential = async (prisma: PrismaClient) => {
     },
   });
 
-  const createUserCredential = () =>
+  const createUsersCredential = () =>
     prisma.userCredential.createMany({
       data: userIds.map(({ id }) => ({
         id: faker.string.uuid(),
@@ -46,6 +46,6 @@ export const createUserCredential = async (prisma: PrismaClient) => {
       })),
     });
 
-  await createAdminUserCredential();
-  await createUserCredential();
+  await createAdminCredential();
+  await createUsersCredential();
 };

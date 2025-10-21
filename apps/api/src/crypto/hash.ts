@@ -1,4 +1,4 @@
-import crypto from 'node:crypto';
+import bcrypt from 'bcryptjs';
 
 /**
  * Generate a hash from a string.
@@ -11,7 +11,7 @@ export const generateHash = (value: string): string => {
     throw new Error('Value is required to generate hash');
   }
 
-  return crypto.createHash('sha256').update(value).digest('hex');
+  return bcrypt.hashSync(value, 10);
 };
 
 /**
@@ -30,5 +30,5 @@ export const compareHash = (value: string, hash: string): boolean => {
     throw new Error('Hash is required to compare hash');
   }
 
-  return generateHash(value) === hash;
+  return bcrypt.compareSync(value, hash);
 };

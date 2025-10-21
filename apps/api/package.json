@@ -29,6 +29,7 @@
     "@koa/cors": "^5.0.0",
     "@koa/router": "^14.0.0",
     "@prisma/client": "^6.17.1",
+    "bcryptjs": "3.0.2",
     "dotenv": "^17.2.3",
     "jsonwebtoken": "^9.0.2",
     "koa": "^3.0.3",

@@ -1,15 +1,34 @@
 import {
+  createSearchParams,
   isRouteErrorResponse,
   Links,
   Meta,
   Outlet,
+  redirect,
   Scripts,
   ScrollRestoration,
 } from 'react-router';
 
+import { getAuthSession } from '@/auth/auth-session.js';
+import { AuthProvider } from '@/auth/auth.js';
 import { darkTheme } from '@/styles/theme.js';
 import { FluentProvider } from '@fluentui/react-components';
 import type { Route } from './+types/root';
+
+export const loader = async ({ request }: Route.LoaderArgs) => {
+  const { isAuthenticated } = await getAuthSession(request);
+  const { pathname } = new URL(request.url);
+
+  // If the user is not logged in and tries to access `/protected`, we redirect
+  // them to `/signin` with a `from` parameter that allows signin to redirect back
+  // to this page upon successful authentication.
+  if (!isAuthenticated && !/\/signin/.test(pathname)) {
+    const params = createSearchParams([['from', new URL(request.url).pathname]]);
+    return redirect('/signin?' + params.toString());
+  }
+
+  return { isAuthenticated };
+};
 
 export const links: Route.LinksFunction = () => [
   {
@@ -44,9 +63,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {/* Add insertion point for Fluent UI styles before the </head>. */}
         <meta name="fluentui-insertion-point" content="fluentui-insertion-point" />
       </head>
-      <body suppressHydrationWarning>
+      <body>
         <FluentProvider theme={darkTheme} className="app-main">
-          {children}
+          <AuthProvider>{children}</AuthProvider>
         </FluentProvider>
         <ScrollRestoration />
         <Scripts />
@@ -55,30 +74,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-// const useStyles = makeStyles({
-//   colorBrandBackground: {
-//     backgroundColor: tokens.colorBrandBackground,
-//     color: tokens.colorNeutralForegroundOnBrand,
-//   },
-//   colorBrandBackground2: {
-//     backgroundColor: tokens.colorBrandBackground2,
-//     color: tokens.colorNeutralForeground2,
-//   },
-//   box: { padding: tokens.spacingHorizontalM },
-//   layout: {
-//     display: 'flex',
-//     gap: `${tokens.spacingHorizontalM} ${tokens.spacingVerticalM}`,
-//   },
-// });
-
 export default function App() {
-  // const styles = useStyles();
-
-  return (
-    // <main className={styles.colorBrandBackground}>
-    <Outlet />
-    // </main>
-  );
+  return <Outlet />;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

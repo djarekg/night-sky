@@ -1,5 +1,5 @@
 import { prisma } from '#app/client/index.js';
-import { accessTokenSecret } from '#app/config.js';
+import { TOKEN_SECRET } from '#app/config.js';
 import { compareHash } from '#app/crypto/hash.js';
 import { Role } from '#app/generated/prisma/enums.js';
 import type { AuiContext } from '#app/types';
@@ -48,7 +48,7 @@ export const signin = async (ctx: AuiContext<{ username: string; password: strin
 
   if (isValid) {
     // Credentials are valid, so return a JWT
-    const token = jwt.sign({ username }, accessTokenSecret, {
+    const token = jwt.sign({ username }, TOKEN_SECRET, {
       expiresIn: '1h',
     });
 
@@ -60,7 +60,7 @@ export const signin = async (ctx: AuiContext<{ username: string; password: strin
 };
 
 export const signout = (ctx: Context) => {
-  jwt.sign({}, accessTokenSecret, {
+  jwt.sign({}, TOKEN_SECRET, {
     expiresIn: '1s', // Expire the token immediately
   });
 

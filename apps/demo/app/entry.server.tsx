@@ -27,7 +27,7 @@ export default function handleRequest(
   responseStatusCode: number,
   responseHeaders: Headers,
   routerContext: EntryContext,
-  loadContext: AppLoadContext
+  _loadContext: AppLoadContext
 ) {
   return new Promise((resolve, reject) => {
     let shellRendered = false;
@@ -48,7 +48,7 @@ export default function handleRequest(
       // 5. Wrap RemixServer with Fluent UI providers
       <RendererProvider renderer={renderer}>
         <SSRProvider>
-          <ServerRouter context={routerContext} url={request.url} abortDelay={ABORT_DELAY} />
+          <ServerRouter context={routerContext} url={request.url} />
         </SSRProvider>
       </RendererProvider>,
 
