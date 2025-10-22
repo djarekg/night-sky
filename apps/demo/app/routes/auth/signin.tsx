@@ -126,6 +126,7 @@ export default function Signin() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleUsernameChange = useCallback(
@@ -146,6 +147,8 @@ export default function Signin() {
   const handleSignin = useCallback(
     async (event?: MouseEvent) => {
       event?.preventDefault();
+
+      setIsAuthenticating(true);
 
       if (isNullOrEmpty(username) || isNullOrEmpty(password)) return;
 
@@ -168,6 +171,8 @@ export default function Signin() {
         setError(signinFailed[result!.statusCode]);
         console.error(`\`${username}\` failed to sign-in`, result?.statusCode);
       }
+
+      setIsAuthenticating(false);
     },
     [username, password]
   );
@@ -224,6 +229,7 @@ export default function Signin() {
           appearance="primary"
           icon={<SendFilled fontSize="16px" />}
           iconPosition="after"
+          disabled={isAuthenticating}
           onClick={handleSignin}>
           Sign In
         </Button>
