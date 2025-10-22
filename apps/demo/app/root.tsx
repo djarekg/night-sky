@@ -1,6 +1,7 @@
 import { getAuthSession } from '@/auth/auth-session.js';
 import { AuthProvider } from '@/auth/auth.js';
 import Footer from '@/components/layout/footer.js';
+import Header from '@/components/layout/header.js';
 import { unprotectedRoutes } from '@/routes.js';
 import { darkTheme } from '@/styles/theme.js';
 import { FluentProvider } from '@fluentui/react-components';
@@ -13,6 +14,7 @@ import {
   redirect,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from 'react-router';
 import type { Route } from './+types/root';
 
@@ -54,6 +56,8 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated } = useLoaderData<typeof loader>();
+
   return (
     <html
       lang="en"
@@ -76,8 +80,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <FluentProvider
           theme={darkTheme}
           className="app-root">
-          <AuthProvider>{children}</AuthProvider>
-          <Footer />
+          <AuthProvider>
+            {isAuthenticated && <Header />}
+            <main className="app-main">{children}</main>
+            <Footer />
+          </AuthProvider>
         </FluentProvider>
         <ScrollRestoration />
         <Scripts />

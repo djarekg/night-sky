@@ -18,10 +18,12 @@ html {
   font-size: 62.5%;
 }
 
-.app-root {
+.app-main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  inline-size: 100%;
+  block-size: 100%;
 }
 
 a {
