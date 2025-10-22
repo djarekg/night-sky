@@ -1,3 +1,9 @@
+import { getAuthSession } from '@/auth/auth-session.js';
+import { AuthProvider } from '@/auth/auth.js';
+import Footer from '@/components/layout/footer.js';
+import { unprotectedRoutes } from '@/routes.js';
+import { darkTheme } from '@/styles/theme.js';
+import { FluentProvider } from '@fluentui/react-components';
 import {
   createSearchParams,
   isRouteErrorResponse,
@@ -8,11 +14,6 @@ import {
   Scripts,
   ScrollRestoration,
 } from 'react-router';
-
-import { getAuthSession } from '@/auth/auth-session.js';
-import { AuthProvider } from '@/auth/auth.js';
-import { darkTheme } from '@/styles/theme.js';
-import { FluentProvider } from '@fluentui/react-components';
 import type { Route } from './+types/root';
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
@@ -22,7 +23,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
   // If the user is not logged in and tries to access `/protected`, we redirect
   // them to `/signin` with a `from` parameter that allows signin to redirect back
   // to this page upon successful authentication.
-  if (!isAuthenticated && !/\/signin/.test(pathname)) {
+  if (!isAuthenticated && !unprotectedRoutes.includes(pathname)) {
     const params = createSearchParams([['from', new URL(request.url).pathname]]);
     return redirect('/signin?' + params.toString());
   }
@@ -54,18 +55,29 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        />
         <Meta />
         <Links />
         {/* Add insertion point for Fluent UI styles before the </head>. */}
-        <meta name="fluentui-insertion-point" content="fluentui-insertion-point" />
+        <meta
+          name="fluentui-insertion-point"
+          content="fluentui-insertion-point"
+        />
       </head>
       <body>
-        <FluentProvider theme={darkTheme} className="app-main">
+        <FluentProvider
+          theme={darkTheme}
+          className="app-root">
           <AuthProvider>{children}</AuthProvider>
+          <Footer />
         </FluentProvider>
         <ScrollRestoration />
         <Scripts />

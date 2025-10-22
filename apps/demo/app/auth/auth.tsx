@@ -1,5 +1,7 @@
 import type { SigninModel } from '@/auth/auth.model.js';
 import authService from '@/auth/auth.service.js';
+import type { ApiError } from '@/core/api/api-error.js';
+import { ApiStatus } from '@/core/api/api-status.js';
 import { isNullOrEmpty } from '@/core/utils/string.js';
 import { createContext, use, useState, type ReactNode } from 'react';
 
@@ -36,14 +38,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   /**
    * Sign-in user and obtain JWT token.
    */
-  const signin = async (userName: string, password: string) => {
+  const signin = async (userName: string, password: string): Promise<SigninModel> => {
     if (isNullOrEmpty(userName) || isNullOrEmpty(password)) {
-      return null;
+      return { statusCode: ApiStatus.badRequest };
     }
 
-    const result = await authService.signin(userName, password);
+    let result = {} as SigninModel;
 
-    if (result) {
+    try {
+      result = await authService.signin(userName, password);
+      result.statusCode = ApiStatus.ok;
+    } catch (err: unknown) {
+      switch ((err as ApiError).status) {
+        case 401:
+          result.statusCode = ApiStatus.unauthorized;
+          break;
+        case 404:
+          result.statusCode = ApiStatus.notFound;
+          break;
+      }
+    }
+
+    if (result.statusCode === ApiStatus.ok) {
       setIsAuthenticated(true);
       setUsername(userName);
       return result;
@@ -51,7 +67,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     setIsAuthenticated(false);
     setUsername(null);
-    return null;
+    return result;
   };
 
   /**

@@ -16,7 +16,9 @@ const authService = {
 
   /**
    * Sign out user from session.
-   * @returns
+   *
+   * @returns {SignoutModel} Returns object with success property where true sign-out
+   * was successful.
    */
   signout: () => {
     const { post } = api();

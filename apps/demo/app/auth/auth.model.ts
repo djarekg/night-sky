@@ -1,16 +1,22 @@
+import { type ApiStatus } from '@/core/api/api-status.js';
+
 export type SigninModel = {
   /**
    * JWT token for user's session.
    */
-  token: string;
+  token?: string;
   /**
    * User's ID.
    */
-  userId: string;
+  userId?: string;
   /**
    * User's access role (i.e. USER).
    */
-  role: string;
+  role?: string;
+  /**
+   * HTTP Status of sign-in request.
+   */
+  statusCode: ApiStatus;
 };
 
 export type SignoutModel = {
