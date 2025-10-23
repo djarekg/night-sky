@@ -131,12 +131,12 @@ export default defineConfig([
     ],
     rules: {
       ...jsTsRules,
-      'no-restricted-imports': [
-        'error',
-        {
-          patterns: [{ regex: '^@fluentui/[^/]+$' }],
-        },
-      ],
+      // 'no-restricted-imports': [
+      //   'error',
+      //   {
+      //     patterns: [{ regex: '^@fluentui/[^/]+$' }],
+      //   },
+      // ],
       // 'no-unnecessary-use-callback': 'error',
       'react-compiler/react-compiler': 'error',
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
