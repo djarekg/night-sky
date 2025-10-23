@@ -17,7 +17,7 @@ type AuthProvider = {
   /**
    * Verify credentials.
    */
-  signin(username: string, password: string): Promise<SigninModel | null>;
+  signin(username: string, password: string): Promise<SigninModel>;
   /**
    * Sign-out user by clearing session cookies.
    */

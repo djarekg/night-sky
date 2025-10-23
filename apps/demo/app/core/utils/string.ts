@@ -4,6 +4,6 @@
  * @param {string | null | undefined} value - The string to check.
  * @returns {boolean} - Returns true if the string is null, undefined, or empty, otherwise false.
  */
-export const isNullOrEmpty = (value: string | null | undefined): boolean => {
+export const isNullOrEmpty = (value: string | null | undefined): value is null | undefined => {
   return value === null || value === undefined || value.trim() === '';
 };

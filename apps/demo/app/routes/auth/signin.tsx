@@ -15,15 +15,7 @@ import {
   tokens,
 } from '@fluentui/react-components';
 import { SendFilled } from '@fluentui/react-icons';
-import {
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-  type ChangeEvent,
-  type KeyboardEvent,
-  type MouseEvent,
-} from 'react';
+import { useCallback, useMemo, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react';
 import {
   redirect,
   useFetcher,
@@ -123,21 +115,9 @@ export default function Signin() {
   const navigate = useNavigate();
   const { signin } = useAuth();
   const { state: locationState } = useLocation();
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-
-  const handleUsernameChange = useCallback(
-    ({ target: { value } }: ChangeEvent<HTMLInputElement>) => setUsername(value),
-    [username]
-  );
-
-  const handlePasswordChange = useCallback(
-    ({ target: { value } }: ChangeEvent<HTMLInputElement>) => setPassword(value),
-    [password]
-  );
 
   const handleEnterKey = useCallback(
     ({ key }: KeyboardEvent) => key === 'Enter' && handleSignin(),
@@ -150,17 +130,21 @@ export default function Signin() {
 
       setIsAuthenticating(true);
 
+      // Extract username and password from FormData
+      const formData = new FormData(formRef.current!);
+      const username = formData.get('username')?.toString();
+      const password = formData.get('password')?.toString();
+
       if (isNullOrEmpty(username) || isNullOrEmpty(password)) return;
 
-      const result = await signin(username, password);
+      const { statusCode, userId, token } = await signin(username, password);
 
       // If user credentials are valid, store profile in session cookie
-      if (result?.statusCode === ApiStatus.ok) {
+      if (statusCode === ApiStatus.ok) {
         setError(null);
 
-        const formData = new FormData(formRef.current!);
-        formData.append('userId', result.userId!);
-        formData.append('token', result.token!);
+        formData.append('userId', userId!);
+        formData.append('token', token!);
 
         // Submit data to server so it can be added to the session cookie
         fetcher.submit(formData, { method: 'post' });
@@ -168,13 +152,13 @@ export default function Signin() {
         // Redirect to the home page or the original page the user was trying to navigate too
         navigate(locationState.from || '/', { replace: true, viewTransition: true });
       } else {
-        setError(signinFailed[result!.statusCode]);
-        console.error(`\`${username}\` failed to sign-in`, result?.statusCode);
+        setError(signinFailed[statusCode]);
+        console.error(`\`${username}\` failed to sign-in`, statusCode);
       }
 
       setIsAuthenticating(false);
     },
-    [username, password]
+    [isAuthenticating, error]
   );
 
   const renderError = useMemo(() => {
@@ -204,8 +188,6 @@ export default function Signin() {
           required>
           <Input
             name="username"
-            value={username}
-            onChange={handleUsernameChange}
             onKeyDown={handleEnterKey}
           />
         </Field>
@@ -217,8 +199,7 @@ export default function Signin() {
           <Input
             name="password"
             type="password"
-            value={password}
-            onChange={handlePasswordChange}
+            autoComplete="off"
             onKeyDown={handleEnterKey}
           />
         </Field>
