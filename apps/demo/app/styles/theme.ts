@@ -1,8 +1,8 @@
 import {
   type BrandVariants,
-  type Theme,
   createDarkTheme,
   createLightTheme,
+  type Theme,
 } from '@fluentui/react-components';
 
 const nightsky: BrandVariants = {
@@ -32,7 +32,7 @@ const darkTheme: Theme = {
   ...createDarkTheme(nightsky),
 };
 
-darkTheme.colorBrandForeground1 = nightsky[110];
-darkTheme.colorBrandForeground2 = nightsky[120];
+darkTheme.colorBrandForeground1 = nightsky[80];
+darkTheme.colorBrandForeground2 = nightsky[90];
 
 export { darkTheme, lightTheme };
