@@ -22,8 +22,8 @@
     "db:clean": "pnpx prisma migrate reset --force",
     "db:seed": "dotenv -e .env -- node --loader ts-node/esm prisma/seed/seed.ts --tsconfig=tsconfig.json",
     "db": "pnpm run db:clean && pnpx prisma generate && pnpx prisma db push && pnpm run db:seed",
-    "build": "",
-    "dev": "node --loader ts-node/esm --watch --env-file=.env --experimental-default-config-file --no-warnings=ExperimentalWarning src/server.ts"
+    "build": "tsgo",
+    "dev": "node --watch --env-file=.env --experimental-default-config-file --no-warnings=ExperimentalWarning src/server.ts"
   },
   "dependencies": {
     "@koa/cors": "^5.0.0",
@@ -43,9 +43,12 @@
     "@types/koa__cors": "^5.0.0",
     "@types/koa__router": "^12.0.4",
     "@types/node": "^24.8.1",
+    "@typescript/native-preview": "7.0.0-dev.20251024.1",
     "dotenv-cli": "^10.0.0",
     "prisma": "^6.17.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "ts-node": "^10.9.2"
+  },
+  "peerDependencies": {
+    "@typescript/native-preview": "7.0.0-dev.20251024.1"
   }
 }

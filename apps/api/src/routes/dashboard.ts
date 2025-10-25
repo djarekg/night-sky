@@ -5,7 +5,7 @@ import {
   getTotalQuantitySold,
   getTotalSales,
   getTotalSalesByMonth,
-} from '#app/controllers/dashboard.js';
+} from '#app/controllers/dashboard.ts';
 import Router from '@koa/router';
 
 const router = new Router();

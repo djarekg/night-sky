@@ -1,4 +1,4 @@
-import type { SearchResultType } from '#app/constants/search-result-type.js';
+import type { SearchResultType } from '#app/constants/search-result-type.ts';
 
 export type SearchResult = {
   id: string;

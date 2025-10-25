@@ -1,4 +1,4 @@
-import { getUser, signin, signout } from '#app/controllers/auth.js';
+import { getUser, signin, signout } from '#app/controllers/auth.ts';
 import Router from '@koa/router';
 
 const router = new Router();

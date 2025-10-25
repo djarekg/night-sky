@@ -1,7 +1,7 @@
-import { prisma } from '#app/client/index.js';
-import { SearchResultTypes } from '#app/constants/search-result-type.js';
-import type { SearchResultParams } from '#app/types/search-result-params.js';
-import type { SearchResult } from '#app/types/search-result.js';
+import { prisma } from '#app/client/index.ts';
+import { SearchResultTypes } from '#app/constants/search-result-type.ts';
+import type { SearchResultParams } from '#app/types/search-result-params.ts';
+import type { SearchResult } from '#app/types/search-result.ts';
 import { randomUUID } from 'crypto';
 import type { Context } from 'koa';
 

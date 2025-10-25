@@ -1,6 +1,6 @@
-import { prisma } from '#app/client/index.js';
-import type { CustomerModel } from '#app/generated/prisma/models.js';
-import type { AuiContext } from '#app/types';
+import { prisma } from '#app/client/index.ts';
+import type { CustomerModel } from '#app/generated/prisma/models.ts';
+import type { AuiContext } from '#app/types/index.ts';
 import type { Context } from 'koa';
 
 export const getCustomers = async (ctx: Context) => {

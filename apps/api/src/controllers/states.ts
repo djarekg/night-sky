@@ -1,4 +1,4 @@
-import { prisma } from '#app/client/index.js';
+import { prisma } from '#app/client/index.ts';
 import type { Context } from 'koa';
 
 export const getStates = async (ctx: Context) => {

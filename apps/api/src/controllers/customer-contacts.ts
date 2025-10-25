@@ -1,9 +1,11 @@
-import { prisma } from '#app/client/index.js';
-import type { CustomerContactModel } from '#app/generated/prisma/models.js';
+import { prisma } from '#app/client/index.ts';
+import type { CustomerContactModel } from '#app/generated/prisma/models.ts';
 import type { Context } from 'koa';
 
 export const getCustomerContacts = async (ctx: Context) => {
-  const { query: { customerId } } = ctx;
+  const {
+    query: { customerId },
+  } = ctx;
   const where = customerId ? { customerId: String(customerId) } : undefined;
 
   try {
@@ -14,8 +16,7 @@ export const getCustomerContacts = async (ctx: Context) => {
       where,
     });
     ctx.body = customerContacts;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: 'Failed to fetch customerContacts' };
     console.error('Failed to fetch customerContacts', err);
@@ -23,7 +24,9 @@ export const getCustomerContacts = async (ctx: Context) => {
 };
 
 export const getCustomerContact = async (ctx: Context) => {
-  const { params: { id } } = ctx;
+  const {
+    params: { id },
+  } = ctx;
 
   try {
     const customerContact = await prisma.customerContact.findFirst({
@@ -33,8 +36,7 @@ export const getCustomerContact = async (ctx: Context) => {
     });
 
     ctx.body = customerContact;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: `Failed to fetch customerContact: ${id}` };
     console.error(`Failed to fetch customerContact: ${id}`, err);
@@ -42,7 +44,10 @@ export const getCustomerContact = async (ctx: Context) => {
 };
 
 export const updateCustomerContact = async (ctx: Context) => {
-  const { params: { id }, request } = ctx;
+  const {
+    params: { id },
+    request,
+  } = ctx;
   const data = (request as any).body as CustomerContactModel;
 
   try {
@@ -54,8 +59,7 @@ export const updateCustomerContact = async (ctx: Context) => {
     });
 
     ctx.body = customerContact;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: `Failed to update customerContact id: ${id}` };
     console.error(`Failed to update customerContact id: ${id}`, err);
@@ -75,8 +79,7 @@ export const createCustomerContact = async (ctx: Context) => {
     });
 
     ctx.body = { id };
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: 'Failed to create customerContact' };
     console.error(`Failed to create customerContact`, err);
@@ -84,7 +87,9 @@ export const createCustomerContact = async (ctx: Context) => {
 };
 
 export const deleteCustomerContact = async (ctx: Context) => {
-  const { params: { id } } = ctx;
+  const {
+    params: { id },
+  } = ctx;
 
   try {
     await prisma.customerContact.delete({
@@ -94,8 +99,7 @@ export const deleteCustomerContact = async (ctx: Context) => {
     });
 
     ctx.body = true;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: `Failed to delete customerContact id: ${id}` };
     console.error(`Failed to delete customerContact id: ${id}`, err);

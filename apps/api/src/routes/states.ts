@@ -1,4 +1,4 @@
-import { getStates } from '#app/controllers/states.js';
+import { getStates } from '#app/controllers/states.ts';
 import Router from '@koa/router';
 
 const router = new Router();

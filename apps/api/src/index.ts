@@ -1,5 +1,5 @@
-export { SearchResultTypes, type SearchResultType } from '#app/constants/index.js';
-export { Color, Gender, ProductType, Role, Size } from '#app/generated/prisma/enums.js';
+export { SearchResultTypes, type SearchResultType } from '#app/constants/index.ts';
+export { Color, Gender, ProductType, Role, Size } from '#app/generated/prisma/enums.ts';
 export type {
   CustomerContactModel,
   CustomerModel,
@@ -9,7 +9,7 @@ export type {
   ProductSaleModel,
   StateModel,
   UserModel,
-} from '#app/generated/prisma/models.js';
+} from '#app/generated/prisma/models.ts';
 export type {
   CustomerHeaderInfo,
   MonthTotalModel,
@@ -20,4 +20,4 @@ export type {
   TopSellerModel,
   TotalQuantitySoldModel,
   TotalSalesModel,
-} from '#app/types/index.js';
+} from '#app/types/index.ts';

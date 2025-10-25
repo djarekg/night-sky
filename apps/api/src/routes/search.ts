@@ -1,4 +1,4 @@
-import { getSearchResults } from '#app/controllers/search.js';
+import { getSearchResults } from '#app/controllers/search.ts';
 import Router from '@koa/router';
 
 const router = new Router();

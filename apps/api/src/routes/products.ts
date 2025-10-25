@@ -4,7 +4,7 @@ import {
   getProduct,
   getProducts,
   updateProduct,
-} from '#app/controllers/products.js';
+} from '#app/controllers/products.ts';
 import Router from '@koa/router';
 
 const router = new Router();

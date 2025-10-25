@@ -69,7 +69,7 @@
       "editor.defaultFormatter": "redhat.vscode-xml",
     },
 
-    // "typescript.experimental.useTsgo": true,
+    "typescript.experimental.useTsgo": true,
     "typescript.format.semicolons": "insert",
     "javascript.preferences.importModuleSpecifier": "non-relative",
     "javascript.preferences.importModuleSpecifierEnding": "js",
@@ -80,7 +80,7 @@
     // "typescript.preferences.importModuleSpecifierEnding": "js",
     // "javascript.preferences.importModuleSpecifier": "non-relative",
     // "javascript.preferences.importModuleSpecifierEnding": "js",
-    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.tsdk": "node_modules/@typescript/native-preview/lib",
     "typescript.reportStyleChecksAsWarnings": false,
 
     "html.autoClosingTags": true,

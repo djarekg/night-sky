@@ -1,8 +1,8 @@
-import { prisma } from '#app/client/index.js';
-import { TOKEN_SECRET } from '#app/config.js';
-import { compareHash } from '#app/crypto/hash.js';
-import { Role } from '#app/generated/prisma/enums.js';
-import type { AuiContext } from '#app/types';
+import { prisma } from '#app/client/index.ts';
+import { TOKEN_SECRET } from '#app/config.ts';
+import { compareHash } from '#app/crypto/hash.ts';
+import { Role } from '#app/generated/prisma/enums.ts';
+import type { AuiContext } from '#app/types/index.ts';
 import jwt from 'jsonwebtoken';
 import type { Context } from 'koa';
 

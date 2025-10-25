@@ -1,14 +1,10 @@
 {
   "extends": "../../tsconfig.node.json",
   "compilerOptions": {
-    // "target": "ESNext",
-    // "module": "esnext",
-    // "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "experimentalDecorators": true,
     "rewriteRelativeImportExtensions": true,
     "erasableSyntaxOnly": true,
-    "baseUrl": "src",
-    // "rootDir": ".",
     "types": ["node"],
     "paths": {
       "#app/*": ["./*"],

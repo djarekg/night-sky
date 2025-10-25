@@ -1,7 +1,7 @@
-import { prisma } from '#app/client/index.js';
-import type { ProductType } from '#app/generated/prisma/enums.js';
-import type { MonthTotalModel } from '#app/types/month-total.js';
-import { getYearRange } from '#app/utils/date.js';
+import { prisma } from '#app/client/index.ts';
+import type { ProductType } from '#app/generated/prisma/enums.ts';
+import type { MonthTotalModel } from '#app/types/month-total.ts';
+import { getYearRange } from '#app/utils/date.ts';
 import type { Context } from 'koa';
 
 export const getTopSellers = async (ctx: Context) => {

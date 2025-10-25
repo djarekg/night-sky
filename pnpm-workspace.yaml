@@ -9,6 +9,10 @@ onlyBuiltDependencies:
   - unrs-resolver
 
 publicHoistPattern:
+  - '@typescript/native'
   - esbuild
   - typescript
   - typegraphql-prisma
+
+overrides:
+  typescript: '@typescript/native-preview'

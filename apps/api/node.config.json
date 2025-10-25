@@ -1,5 +1,4 @@
 {
-  "$schema": "https://nodejs.org/dist/vX.Y.Z/docs/node-config-schema.json",
   "nodeOptions": {
     "inspect-port": 4004,
     "enable-source-maps": true,

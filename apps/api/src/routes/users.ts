@@ -1,4 +1,4 @@
-import { createUser, deleteUser, getUser, getUsers, updateUser } from '#app/controllers/users.js';
+import { createUser, deleteUser, getUser, getUsers, updateUser } from '#app/controllers/users.ts';
 import Router from '@koa/router';
 
 const router = new Router();

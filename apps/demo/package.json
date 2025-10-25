@@ -11,7 +11,7 @@
     "build": "react-router build",
     "dev": "react-router dev --port 5173",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsgo"
   },
   "dependencies": {
     "@fluentui/react-components": "^9.72.2",
@@ -31,12 +31,15 @@
     "@types/node": "^24.8.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
+    "@typescript/native-preview": "7.0.0-dev.20251024.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
     "vite": "^7.1.10",
     "vite-plugin-babel": "^1.3.2",
     "vite-plugin-cjs-interop": "^2.3.0",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "peerDependencies": {
+    "@typescript/native-preview": "7.0.0-dev.20251024.1"
   }
 }

@@ -5,7 +5,7 @@ import {
   getCustomers,
   getCustomersHeaderInfo,
   updateCustomer,
-} from '#app/controllers/customers.js';
+} from '#app/controllers/customers.ts';
 import Router from '@koa/router';
 
 const router = new Router();

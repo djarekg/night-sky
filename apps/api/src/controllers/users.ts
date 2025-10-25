@@ -1,13 +1,12 @@
-import { prisma } from '#app/client/index.js';
-import type { UserModel } from '#app/generated/prisma/models.js';
+import { prisma } from '#app/client/index.ts';
+import type { UserModel } from '#app/generated/prisma/models.ts';
 import type { Context } from 'koa';
 
 export const getUsers = async (ctx: Context) => {
   try {
     const users = await prisma.user.findMany();
     ctx.body = users;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: 'Failed to fetch users' };
     console.error('Failed to fetch users', err);
@@ -15,7 +14,9 @@ export const getUsers = async (ctx: Context) => {
 };
 
 export const getUser = async (ctx: Context) => {
-  const { params: { id } } = ctx;
+  const {
+    params: { id },
+  } = ctx;
 
   try {
     const user = await prisma.user.findFirst({
@@ -25,8 +26,7 @@ export const getUser = async (ctx: Context) => {
     });
 
     ctx.body = user;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: `Failed to fetch user: ${id}` };
     console.error(`Failed to fetch user: ${id}`, err);
@@ -34,7 +34,10 @@ export const getUser = async (ctx: Context) => {
 };
 
 export const updateUser = async (ctx: Context) => {
-  const { params: { id }, request } = ctx;
+  const {
+    params: { id },
+    request,
+  } = ctx;
   const data = (request as any).body as UserModel;
 
   try {
@@ -46,8 +49,7 @@ export const updateUser = async (ctx: Context) => {
     });
 
     ctx.body = user;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: `Failed to update user id: ${id}` };
     console.error(`Failed to update user id: ${id}`, err);
@@ -67,8 +69,7 @@ export const createUser = async (ctx: Context) => {
     });
 
     ctx.body = { id };
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: 'Failed to create user' };
     console.error(`Failed to create user`, err);
@@ -76,7 +77,9 @@ export const createUser = async (ctx: Context) => {
 };
 
 export const deleteUser = async (ctx: Context) => {
-  const { params: { id } } = ctx;
+  const {
+    params: { id },
+  } = ctx;
 
   try {
     await prisma.user.delete({
@@ -86,8 +89,7 @@ export const deleteUser = async (ctx: Context) => {
     });
 
     ctx.body = true;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: `Failed to delete user id: ${id}` };
     console.error(`Failed to delete user id: ${id}`, err);

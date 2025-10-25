@@ -4,7 +4,7 @@ import {
   getCustomerContact,
   getCustomerContacts,
   updateCustomerContact,
-} from '#app/controllers/customer-contacts.js';
+} from '#app/controllers/customer-contacts.ts';
 import Router from '@koa/router';
 
 const router = new Router();
