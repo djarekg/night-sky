@@ -1,4 +1,4 @@
-import { getSession } from '@/core/session/session.server.js';
+import { getSession } from '@/session.server.js';
 
 export type AuthSession = {
   /**
@@ -23,7 +23,7 @@ export type AuthSession = {
  */
 export const getAuthSession = async (request: Request): Promise<Omit<AuthSession, 'token'>> => {
   const session = await getSession(request.headers.get('Cookie'));
-  const sessionString = await session.get('userId')!;
+  const sessionString = session.get('userId');
   const { token = null, username = null } = sessionString
     ? (JSON.parse(sessionString) as AuthSession)
     : {};

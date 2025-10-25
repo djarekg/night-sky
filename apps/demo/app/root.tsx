@@ -1,17 +1,14 @@
-import { getAuthSession } from '@/auth/auth-session.js';
-import { AuthProvider } from '@/auth/auth.js';
 import Footer from '@/components/layout/footer.js';
 import Header from '@/components/layout/header.js';
-import { unprotectedRoutes } from '@/routes.js';
+import { getAuthSession } from '@/core/auth/auth-session.js';
+import { AuthProvider } from '@/core/auth/auth.js';
 import { darkTheme } from '@/styles/theme.js';
 import { FluentProvider } from '@fluentui/react-components';
 import {
-  createSearchParams,
   isRouteErrorResponse,
   Links,
   Meta,
   Outlet,
-  redirect,
   Scripts,
   ScrollRestoration,
   useLoaderData,
@@ -20,16 +17,6 @@ import type { Route } from './+types/root';
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
   const { isAuthenticated } = await getAuthSession(request);
-  const { pathname } = new URL(request.url);
-
-  // If the user is not logged in and tries to access `/protected`, we redirect
-  // them to `/signin` with a `from` parameter that allows signin to redirect back
-  // to this page upon successful authentication.
-  if (!isAuthenticated && !unprotectedRoutes.includes(pathname)) {
-    const params = createSearchParams([['from', new URL(request.url).pathname]]);
-    return redirect('/signin?' + params.toString());
-  }
-
   return { isAuthenticated };
 };
 
@@ -77,6 +64,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
       </head>
       <body>
+        {/* <div className="app-background"></div> */}
         <FluentProvider
           theme={darkTheme}
           className="app-root">

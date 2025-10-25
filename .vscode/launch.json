@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "launch api",
+      "name": "Launch api",
       "cwd": "${workspaceFolder}/apps/api",
       "request": "launch",
       "type": "node-terminal",
@@ -13,19 +13,60 @@
       "internalConsoleOptions": "openOnSessionStart"
     },
     {
-      "name": "launch app",
+      "name": "Launch server-side",
+      "program": "${workspaceFolder}/apps/demo/app/entry.server.tsx",
+      "cwd": "${workspaceFolder}/apps/demo",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node",
+      "runtimeArgs": ["--import", "./register.js"],
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "sourceMaps": true,
+      "presentation": {
+        "hidden": false,
+        "group": "2",
+        "order": 1
+      }
+    },
+    {
+      "name": "Launch client-side",
+      "cwd": "${workspaceFolder}/apps/demo",
+      "request": "launch",
+      "type": "node-terminal",
+      "command": "pnpm run dev",
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "smartStep": true,
+      "internalConsoleOptions": "openOnSessionStart",
+      "presentation": {
+        "hidden": false,
+        "group": "2",
+        "order": 2
+      }
+    },
+    {
+      "name": "Launch app",
       "type": "chrome",
       "request": "launch",
-      "preLaunchTask": "pnpm run dev",
-      "url": "http://localhost:5173/",
+      "cwd": "${workspaceFolder}/apps/demo",
       "webRoot": "${workspaceFolder}/apps/demo",
-      "cwd": "${workspaceFolder}/apps/demo"
+      "url": "http://localhost:5173/",
+      "internalConsoleOptions": "openOnSessionStart",
+      "sourceMaps": true,
+      "smartStep": true,
+      "presentation": {
+        "hidden": false,
+        "group": "2",
+        "order": 3
+      }
     }
   ],
   "compounds": [
     {
       "name": "debug app",
-      "configurations": ["launch api", "launch app"],
+      "configurations": ["Launch api", "Launch client-side", "Launch app"],
       "stopAll": true,
       "presentation": {
         "hidden": false,

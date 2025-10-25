@@ -1,5 +1,9 @@
+import type { Route } from '@/+types/root.js';
+import authMiddleware from '@/core/auth/auth-middleware.js';
 import { makeStyles, tokens } from '@fluentui/react-components';
-import type { Route } from './+types/home';
+
+// Protect route with authentication
+export const middleware = [authMiddleware];
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: 'Night Sky' }, { name: 'description', content: 'React demo app!' }];

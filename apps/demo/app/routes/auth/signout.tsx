@@ -1,4 +1,4 @@
-import { destroySession, getSession } from '@/core/session/session.server.js';
+import { destroySession, getSession } from '@/session.server.js';
 import { redirect, type LoaderFunctionArgs } from 'react-router';
 
 /**

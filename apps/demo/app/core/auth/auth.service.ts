@@ -1,5 +1,5 @@
-import { type SigninModel, type SignoutModel } from '@/auth/auth.model.js';
 import api from '@/core/api/api.js';
+import { type SigninModel, type SignoutModel } from '@/core/auth/auth.model.js';
 
 const authService = {
   /**

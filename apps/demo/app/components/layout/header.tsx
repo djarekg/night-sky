@@ -8,7 +8,15 @@ import {
   MenuTrigger,
   tokens,
 } from '@fluentui/react-components';
-import { PersonCircleRegular, PersonSettingsRegular, SignOutRegular } from '@fluentui/react-icons';
+import {
+  bundleIcon,
+  PersonCircleFilled,
+  PersonCircleRegular,
+  PersonSettingsFilled,
+  PersonSettingsRegular,
+  SignOutFilled,
+  SignOutRegular,
+} from '@fluentui/react-icons';
 
 const useStyles = makeStyles({
   container: {
@@ -20,12 +28,18 @@ const useStyles = makeStyles({
     inlineSize: '100%',
     paddingInline: tokens.spacingHorizontalL,
     boxSizing: 'border-box',
+    zIndex: 2,
   },
   title: {
-    color: tokens.colorBrandForeground1,
     fontSize: tokens.fontSizeBase600,
+    fontWeight: tokens.fontWeightMedium,
   },
 });
+
+const PersonIcon = bundleIcon(PersonCircleFilled, PersonCircleRegular);
+const SettingsIcon = bundleIcon(PersonSettingsFilled, PersonSettingsRegular);
+const SignOutIcon = bundleIcon(SignOutFilled, SignOutRegular);
+
 const Header = () => {
   const classes = useStyles();
 
@@ -37,7 +51,7 @@ const Header = () => {
           <Button
             appearance="transparent"
             size="large"
-            icon={<PersonCircleRegular />}
+            icon={<PersonIcon />}
           />
         </MenuTrigger>
 
@@ -45,12 +59,12 @@ const Header = () => {
           <MenuList>
             <MenuItemLink
               href="/user/settings"
-              icon={<PersonSettingsRegular />}>
+              icon={<SettingsIcon />}>
               Profile
             </MenuItemLink>
             <MenuItemLink
               href="/signout"
-              icon={<SignOutRegular />}>
+              icon={<SignOutIcon />}>
               Logout
             </MenuItemLink>
           </MenuList>

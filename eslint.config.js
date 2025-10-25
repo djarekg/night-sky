@@ -102,7 +102,7 @@ export default defineConfig([
   reactCompiler.configs.recommended,
   reactHooks.configs.flat.recommended,
   {
-    ignores: ['eslint.config.mjs', '**/node_modules', '**/dist', '**/temp'],
+    ignores: ['eslint.config.js', '**/node_modules', '**/dist', '**/temp'],
   },
   {
     files: ['**/*.{js,mjs,ts,jsx,tsx}'],
@@ -125,7 +125,6 @@ export default defineConfig([
       ...tseslint.configs.stylisticTypeChecked,
       pluginReact.configs.flat.recommended,
       reactRefresh.configs.recommended,
-      // 'plugin:@fluentui/react-components/recommended',
       eslintConfigPrettier,
       prettierPlugin,
     ],

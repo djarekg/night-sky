@@ -1,8 +1,8 @@
-import { getAuthSession } from '@/auth/auth-session.js';
-import { useAuth } from '@/auth/auth.js';
 import { ApiStatus } from '@/core/api/api-status.js';
-import { commitSession, getSession } from '@/core/session/session.server.js';
+import { getAuthSession } from '@/core/auth/auth-session.js';
+import { useAuth } from '@/core/auth/auth.js';
 import { isNullOrEmpty } from '@/core/utils/string.js';
+import { commitSession, getSession } from '@/session.server.js';
 import {
   Button,
   Field,
@@ -14,15 +14,8 @@ import {
   MessageBarTitle,
   tokens,
 } from '@fluentui/react-components';
-import { SendFilled } from '@fluentui/react-icons';
 import { useCallback, useMemo, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react';
-import {
-  redirect,
-  useFetcher,
-  useLocation,
-  useNavigate,
-  type ActionFunctionArgs,
-} from 'react-router';
+import { redirect, useFetcher, type ActionFunctionArgs } from 'react-router';
 
 const signinFailed: Record<number, string> = {
   400: 'The username and/or password are required',
@@ -112,9 +105,7 @@ const useStyles = makeStyles({
 export default function Signin() {
   const classes = useStyles();
   const fetcher = useFetcher();
-  const navigate = useNavigate();
   const { signin } = useAuth();
-  const { state: locationState } = useLocation();
   const [error, setError] = useState<string | null>(null);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -147,10 +138,7 @@ export default function Signin() {
         formData.append('token', token!);
 
         // Submit data to server so it can be added to the session cookie
-        fetcher.submit(formData, { method: 'post' });
-
-        // Redirect to the home page or the original page the user was trying to navigate too
-        navigate(locationState.from || '/', { replace: true, viewTransition: true });
+        await fetcher.submit(formData, { method: 'post' });
       } else {
         setError(signinFailed[statusCode]);
         console.error(`\`${username}\` failed to sign-in`, statusCode);
@@ -208,8 +196,6 @@ export default function Signin() {
       <footer className={classes.footer}>
         <Button
           appearance="primary"
-          icon={<SendFilled fontSize="16px" />}
-          iconPosition="after"
           disabled={isAuthenticating}
           onClick={handleSignin}>
           Sign In

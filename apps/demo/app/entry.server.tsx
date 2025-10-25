@@ -7,12 +7,14 @@ import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import type { AppLoadContext, EntryContext } from 'react-router';
 import { ServerRouter } from 'react-router';
 // 1. Import required Fluent UI SSR utilities
-import {
-  createDOMRenderer,
-  RendererProvider,
-  renderToStyleElements,
-  SSRProvider,
-} from '@fluentui/react-components';
+import * as FluentUI from '@fluentui/react-components';
+const { createDOMRenderer, RendererProvider, renderToStyleElements, SSRProvider } = FluentUI;
+// import {
+//   createDOMRenderer,
+//   RendererProvider,
+//   renderToStyleElements,
+//   SSRProvider,
+// } from '@fluentui/react-components';
 
 const ABORT_DELAY = 5_000;
 
@@ -48,7 +50,10 @@ export default function handleRequest(
       // 5. Wrap RemixServer with Fluent UI providers
       <RendererProvider renderer={renderer}>
         <SSRProvider>
-          <ServerRouter context={routerContext} url={request.url} />
+          <ServerRouter
+            context={routerContext}
+            url={request.url}
+          />
         </SSRProvider>
       </RendererProvider>,
 
