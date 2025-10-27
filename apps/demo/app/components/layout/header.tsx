@@ -1,3 +1,4 @@
+import GhostIcon from '@/components/icons/ghost.js';
 import { authLoader } from '@/core/auth/auth-loader.js';
 import { tokens } from '@/styles/theme.js';
 import {
@@ -18,7 +19,8 @@ import {
   SignOutFilled,
   SignOutRegular,
 } from '@fluentui/react-icons';
-import { useLoaderData } from 'react-router';
+import type { MouseEvent } from 'react';
+import { useLoaderData, useNavigate } from 'react-router';
 
 const useStyles = makeStyles({
   container: {
@@ -31,6 +33,23 @@ const useStyles = makeStyles({
     paddingInline: tokens.spacingHorizontalL,
     boxSizing: 'border-box',
     zIndex: 2,
+  },
+  homeLink: {
+    display: 'flex',
+    gap: '1em',
+    transition: 'color 200ms ease-in',
+
+    '> .app-icon': {
+      transition: 'color 200ms ease-in, transform 300ms ease-in-out',
+      color: 'transparent',
+    },
+    ':hover': {
+      color: tokens.colorBrandForeground1,
+    },
+    '&:hover .app-icon': {
+      color: tokens.colorSecondaryForegroundGradient,
+      transform: 'scale(1.2)',
+    },
   },
   title: {
     fontSize: tokens.fontSizeBase600,
@@ -46,12 +65,28 @@ export const loader = authLoader;
 
 const Header = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const { userId } = useLoaderData<typeof loader>();
   const settingsPath = `/users/${userId}/settings`;
 
+  const handleLink = (e: MouseEvent, href: string) => {
+    e.preventDefault();
+    navigate(href, { viewTransition: true });
+  };
+
   return (
     <header className={classes.container}>
-      <span className={classes.title}>Night Sky</span>
+      <Button
+        appearance="transparent"
+        className={classes.homeLink}
+        onClick={e => handleLink(e, '/')}>
+        <GhostIcon
+          size={48}
+          strokeWidth={1}
+          strokeColor={tokens.colorBrandForeground1}
+        />
+        <span className={classes.title}>Night Sky</span>
+      </Button>
       <Menu hasIcons>
         <MenuTrigger disableButtonEnhancement>
           <Button
@@ -64,13 +99,15 @@ const Header = () => {
         <MenuPopover>
           <MenuList>
             <MenuItemLink
-              href={settingsPath}
-              icon={<SettingsIcon />}>
+              href="#"
+              icon={<SettingsIcon />}
+              onClick={e => handleLink(e, settingsPath)}>
               Profile
             </MenuItemLink>
             <MenuItemLink
-              href="/signout"
-              icon={<SignOutIcon />}>
+              href="#"
+              icon={<SignOutIcon />}
+              onClick={e => handleLink(e, '/signout')}>
               Logout
             </MenuItemLink>
           </MenuList>

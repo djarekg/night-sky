@@ -2,12 +2,14 @@ import type { FC } from 'react';
 import type { IconProps } from './icon-props';
 
 type GhostProps = {
+  fill?: string;
   strokeWidth?: number;
   strokeColor?: string;
 } & IconProps;
 
 const GhostIcon: FC<GhostProps> = ({
   className,
+  fill = 'currentColor',
   size = 24,
   strokeWidth = 1.5,
   strokeColor = '#222',
@@ -17,13 +19,13 @@ const GhostIcon: FC<GhostProps> = ({
       data-icon="ghost-icon"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      className={className}
+      className={`app-icon app-ghost-icon ${className}`}
       fill="currentColor"
       width={`${size}px`}
       height={`${size}px`}>
       <title>Ghost UI</title>
       <path
-        fill="currentColor"
+        fill={fill}
         strokeWidth={strokeWidth}
         stroke={strokeColor}
         d="M12 2a9 9 0 0 1 9 9v7.5a3.5 3.5 0 0 1-6.39 1.976a2.999 2.999 0 0 1-5.223 0a3.5 3.5 0 0 1-6.382-1.783L3 18.499V11a9 9 0 0 1 9-9m0 10c-1.105 0-2 1.12-2 2.5s.895 2.5 2 2.5s2-1.12 2-2.5s-.895-2.5-2-2.5M9.5 8a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3m5 0a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3"

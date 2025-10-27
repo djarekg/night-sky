@@ -1,4 +1,4 @@
-import { index, prefix, route, type RouteConfig } from '@react-router/dev/routes';
+import { index, layout, prefix, route, type RouteConfig } from '@react-router/dev/routes';
 
 export const unprotectedRoutes = ['/signin', '/forgot-password'];
 
@@ -9,10 +9,12 @@ export default [
   route('signup', 'routes/auth/signup.tsx'),
   route('forgot-password', 'routes/auth/forgot-password.tsx'),
   ...prefix('users', [
-    index('routes/users/index.tsx'),
+    index('routes/users/users.tsx'),
     ...prefix(':id', [
-      index('routes/users/[id]/index.tsx'),
-      route('settings', 'routes/users/[id]/settings.tsx'),
+      layout('routes/users/[id]/layout.tsx', [
+        index('routes/users/[id]/user.tsx'),
+        route('settings', 'routes/users/[id]/settings.tsx'),
+      ]),
     ]),
   ]),
 ] satisfies RouteConfig;
