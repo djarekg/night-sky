@@ -1,18 +1,20 @@
-import { getSession } from '@/session.server.js';
 import { type MiddlewareFunction, redirect } from 'react-router';
+import { getAuthSession } from './auth-session.js';
+import { authContext } from './auth-context.js';
 
 /**
- * Server-side authentication middleware.
+ * Middleware function for authentication. If user is not authenticated
+ * then redirect `signin`.
  */
-const authMiddleware: MiddlewareFunction = async ({ request }) => {
-  const cookie = request.headers.get('Cookie');
-  const session = await getSession(cookie);
-  const userId = session.get('userId');
+const authMiddleware: MiddlewareFunction = async ({ request, context }) => {
+  const { userId, username, isAuthenticated } = await getAuthSession(request);
 
-  if (!userId) {
+  if (!userId || !username || !isAuthenticated) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw redirect('/signin');
   }
+
+  context.set(authContext, { userId, username, isAuthenticated });
 };
 
 export default authMiddleware;

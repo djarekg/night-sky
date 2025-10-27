@@ -1,19 +1,19 @@
-import { type PrismaClient, Role } from '#app/generated/prisma/client.js';
+import { type PrismaClient, Role } from '#app/generated/prisma/client.ts';
 
 export const createProductSales = async (prisma: PrismaClient) => {
   console.log('Seeding ProductSale...');
 
   const createProductSales = async () => {
     const customerIds = (await prisma.customer.findMany()).map(({ id }) => id);
-    const salesUserIds = (await prisma.user.findMany({
-      where: {
-        userCredential: {
-          role: Role.SALES,
+    const salesUserIds = (
+      await prisma.user.findMany({
+        where: {
+          userCredential: {
+            role: Role.SALES,
+          },
         },
-      },
-    })).map(
-      ({ id }) => id,
-    );
+      })
+    ).map(({ id }) => id);
     const products = await prisma.product.findMany({
       select: {
         id: true,

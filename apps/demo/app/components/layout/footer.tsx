@@ -1,13 +1,13 @@
-import { makeStyles, tokens } from '@fluentui/react-components';
+import { makeStyles } from '@fluentui/react-components';
+import { tokens } from '@/styles/theme.js';
 
 const useStyles = makeStyles({
   footer: {
-    position: 'fixed',
-    insetBlockEnd: '0',
     display: 'flex',
     justifyContent: 'end',
     padding: tokens.spacingVerticalXL,
     inlineSize: '100%',
+    blockSize: tokens.appHeaderFooterBlockSize,
     boxSizing: 'border-box',
   },
 });

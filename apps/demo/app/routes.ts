@@ -10,6 +10,9 @@ export default [
   route('forgot-password', 'routes/auth/forgot-password.tsx'),
   ...prefix('users', [
     index('routes/users/index.tsx'),
-    ...prefix(':id', [index('routes/users/[id]/index.tsx')]),
+    ...prefix(':id', [
+      index('routes/users/[id]/index.tsx'),
+      route('settings', 'routes/users/[id]/settings.tsx'),
+    ]),
   ]),
 ] satisfies RouteConfig;

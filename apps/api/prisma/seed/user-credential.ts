@@ -1,6 +1,6 @@
-import { generateHash } from '#app/crypto/hash.js';
-import type { PrismaClient } from '#app/generated/prisma/client.js';
-import { Role } from '#app/generated/prisma/enums.js';
+import { generateHash } from '#app/crypto/hash.ts';
+import type { PrismaClient } from '#app/generated/prisma/client.ts';
+import { Role } from '#app/generated/prisma/enums.ts';
 import { faker } from './faker-context.ts';
 
 export const createUserCredential = async (prisma: PrismaClient) => {

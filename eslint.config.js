@@ -64,7 +64,7 @@ const jsTsRules = {
   // JavaScript best practices
   eqeqeq: 'error',
   complexity: ['error', 20],
-  curly: 'error',
+  curly: 'off',
   'guard-for-in': 'error',
   'max-classes-per-file': ['error', 1],
   'max-len': [
@@ -124,6 +124,8 @@ export default defineConfig([
     },
     extends: [
       js.configs.recommended,
+      // importPlugin.flatConfigs.recommended,
+      // importPlugin.flatConfigs.typescript,
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
       pluginReact.configs.flat.recommended,

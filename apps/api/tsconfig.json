@@ -3,9 +3,10 @@
   "compilerOptions": {
     "allowImportingTsExtensions": true,
     "experimentalDecorators": true,
-    "rewriteRelativeImportExtensions": true,
+    "rewriteRelativeImportExtensions": false,
     "erasableSyntaxOnly": true,
     "types": ["node"],
+    "baseUrl": "src",
     "paths": {
       "#app/*": ["./*"],
       "#app/constants/*": ["./constants/*"],

@@ -1,4 +1,4 @@
-import type { PrismaClient } from '#app/generated/prisma/client.js';
+import type { PrismaClient } from '#app/generated/prisma/client.ts';
 import { faker } from './faker-context.ts';
 
 export const createStates = async (prisma: PrismaClient) => {
@@ -70,7 +70,7 @@ export const createStates = async (prisma: PrismaClient) => {
 };
 
 export const useState = async (prisma: PrismaClient) => {
-  const states: { id: string; }[] = await prisma.state.findMany({
+  const states: { id: string }[] = await prisma.state.findMany({
     select: {
       id: true,
     },

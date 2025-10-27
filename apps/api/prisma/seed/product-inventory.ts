@@ -1,4 +1,4 @@
-import { type PrismaClient, ProductType, Size } from '#app/generated/prisma/client.js';
+import { type PrismaClient, ProductType, Size } from '#app/generated/prisma/client.ts';
 
 export const createProductInventories = async (prisma: PrismaClient) => {
   console.log('Seeding ProductInventory...');

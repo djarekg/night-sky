@@ -1,24 +1,35 @@
-import type { Route } from '@/+types/root.js';
 import authMiddleware from '@/core/auth/auth-middleware.js';
-import { makeStyles, tokens } from '@fluentui/react-components';
+import { makeStyles } from '@fluentui/react-components';
+import { dashboards } from '@/components/dashboards/dashboards.js';
+import { tokens } from '@/styles/theme.js';
 
 // Protect route with authentication
 export const middleware = [authMiddleware];
 
-export function meta({}: Route.MetaArgs) {
-  return [{ title: 'Night Sky' }, { name: 'description', content: 'React demo app!' }];
-}
-
 const useStyles = makeStyles({
   container: {
     display: 'grid',
-    placeContent: 'center',
-    inlineSize: '100%',
+    gridTemplateColumns: '1fr 1fr',
+    rowGap: tokens.spacingVerticalXXL,
+    columnGap: tokens.spacingHorizontalXXL,
+    inlineSize: '70%',
     blockSize: '100%',
+    marginInline: 'auto',
   },
-  title: {
-    color: tokens.colorBrandForeground1,
-    fontSize: tokens.fontSizeHero900,
+  widget: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    border: `1px solid ${tokens.colorBrandForeground1}`,
+    borderRadius: tokens.borderRadiusXLarge,
+    fontSize: tokens.fontSizeBase500,
+    boxShadow: tokens.shadow4,
+    transition: 'box-shadow 100ms ease-in-out, transform 100ms ease-in-out',
+    willChange: 'box-shadow, transform',
+    '&:hover': {
+      boxShadow: tokens.shadow8,
+      transform: 'scale(1.01)',
+    },
   },
 });
 
@@ -27,7 +38,15 @@ export default function Home() {
 
   return (
     <div className={classes.container}>
-      <span className={classes.title}>Night Sky</span>
+      {dashboards.map(({ name, type }) => {
+        return (
+          <div
+            key={type}
+            className={classes.widget}>
+            {name}
+          </div>
+        );
+      })}
     </div>
   );
 }

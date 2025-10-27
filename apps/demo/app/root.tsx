@@ -1,6 +1,6 @@
 import Footer from '@/components/layout/footer.js';
 import Header from '@/components/layout/header.js';
-import { getAuthSession } from '@/core/auth/auth-session.js';
+import { authLoader } from '@/core/auth/auth-loader.js';
 import { AuthProvider } from '@/core/auth/auth.js';
 import { darkTheme } from '@/styles/theme.js';
 import { FluentProvider } from '@fluentui/react-components';
@@ -14,11 +14,6 @@ import {
   useLoaderData,
 } from 'react-router';
 import type { Route } from './+types/root';
-
-export const loader = async ({ request }: Route.LoaderArgs) => {
-  const { isAuthenticated } = await getAuthSession(request);
-  return { isAuthenticated };
-};
 
 export const links: Route.LinksFunction = () => [
   {
@@ -42,6 +37,8 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+export const loader = authLoader;
+
 export function Layout({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useLoaderData<typeof loader>();
 
@@ -57,14 +54,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
         <Meta />
         <Links />
-        {/* Add insertion point for Fluent UI styles before the </head>. */}
         <meta
           name="fluentui-insertion-point"
           content="fluentui-insertion-point"
         />
       </head>
       <body>
-        {/* <div className="app-background"></div> */}
         <FluentProvider
           theme={darkTheme}
           className="app-root">

@@ -1,4 +1,4 @@
-import type { PrismaClient } from '#app/generated/prisma/client.js';
+import type { PrismaClient } from '#app/generated/prisma/client.ts';
 import { faker } from './faker-context.ts';
 import { useState } from './state.ts';
 

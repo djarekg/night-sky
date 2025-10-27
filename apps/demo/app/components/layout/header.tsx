@@ -1,3 +1,5 @@
+import { authLoader } from '@/core/auth/auth-loader.js';
+import { tokens } from '@/styles/theme.js';
 import {
   Button,
   makeStyles,
@@ -6,7 +8,6 @@ import {
   MenuList,
   MenuPopover,
   MenuTrigger,
-  tokens,
 } from '@fluentui/react-components';
 import {
   bundleIcon,
@@ -17,6 +18,7 @@ import {
   SignOutFilled,
   SignOutRegular,
 } from '@fluentui/react-icons';
+import { useLoaderData } from 'react-router';
 
 const useStyles = makeStyles({
   container: {
@@ -24,7 +26,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    blockSize: '60px',
+    blockSize: tokens.appHeaderFooterBlockSize,
     inlineSize: '100%',
     paddingInline: tokens.spacingHorizontalL,
     boxSizing: 'border-box',
@@ -40,8 +42,12 @@ const PersonIcon = bundleIcon(PersonCircleFilled, PersonCircleRegular);
 const SettingsIcon = bundleIcon(PersonSettingsFilled, PersonSettingsRegular);
 const SignOutIcon = bundleIcon(SignOutFilled, SignOutRegular);
 
+export const loader = authLoader;
+
 const Header = () => {
   const classes = useStyles();
+  const { userId } = useLoaderData<typeof loader>();
+  const settingsPath = `/users/${userId}/settings`;
 
   return (
     <header className={classes.container}>
@@ -58,7 +64,7 @@ const Header = () => {
         <MenuPopover>
           <MenuList>
             <MenuItemLink
-              href="/user/settings"
+              href={settingsPath}
               icon={<SettingsIcon />}>
               Profile
             </MenuItemLink>

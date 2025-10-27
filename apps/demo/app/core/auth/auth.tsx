@@ -1,9 +1,10 @@
 import type { ApiError } from '@/core/api/api-error.js';
 import { ApiStatus } from '@/core/api/api-status.js';
-import type { SigninModel } from '@/core/auth/auth.model.js';
+import type { AuthModel, SigninModel } from '@/core/auth/auth.model.js';
 import authService from '@/core/auth/auth.service.js';
 import { isNullOrEmpty } from '@/core/utils/string.js';
 import { createContext, use, useState, type ReactNode } from 'react';
+import safeSessionStorage from '@/core/utils/session-storage.js';
 
 type AuthProvider = {
   /**
@@ -13,7 +14,11 @@ type AuthProvider = {
   /**
    * User's username.
    */
-  username: null | string;
+  username: string | null;
+  /**
+   * User's ID.
+   */
+  userId: string | null;
   /**
    * Verify credentials.
    */
@@ -32,8 +37,18 @@ type AuthProvider = {
  * @returns {JSX.Element} The AuthContext provider wrapping the children.
  */
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [username, setUsername] = useState<string | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const auth = JSON.parse(safeSessionStorage.getItem('auth')! ?? null) as AuthModel;
+  const [userId, setUserId] = useState<string | null>(auth?.userId ?? null);
+  const [username, setUsername] = useState<string | null>(auth?.username ?? null);
+  const [isAuthenticated, setIsAuthenticated] = useState(auth?.isAuthenticated ?? false);
+
+  const setStore = (auth: AuthModel | null) => {
+    if (auth) {
+      safeSessionStorage.setItem('auth', JSON.stringify(auth));
+    } else {
+      safeSessionStorage.removeItem('auth');
+    }
+  };
 
   /**
    * Sign-in user and obtain JWT token.
@@ -60,12 +75,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     if (result.statusCode === ApiStatus.ok) {
+      setStore({ userId: result.userId!, username: userName, isAuthenticated: true });
       setIsAuthenticated(true);
+      setUserId(result.userId!);
       setUsername(userName);
       return result;
     }
 
+    setStore(null);
     setIsAuthenticated(false);
+    setUserId(null);
     setUsername(null);
     return result;
   };
@@ -85,7 +104,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return false;
   };
 
-  const value = { username, isAuthenticated, signin, signout };
+  const value = { userId, username, isAuthenticated, signin, signout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

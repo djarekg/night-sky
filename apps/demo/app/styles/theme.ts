@@ -2,6 +2,7 @@ import {
   type BrandVariants,
   createDarkTheme,
   createLightTheme,
+  tokens as fluentuiTokens,
   type Theme,
 } from '@fluentui/react-components';
 
@@ -24,15 +25,26 @@ const nightsky: BrandVariants = {
   160: '#E4CFF4',
 };
 
-const lightTheme: Theme = {
-  ...createLightTheme(nightsky),
+type AppTheme = Theme & {
+  appHeaderFooterBlockSize: string;
 };
 
-const darkTheme: Theme = {
+const lightTheme: AppTheme = {
+  ...createLightTheme(nightsky),
+  appHeaderFooterBlockSize: '60px',
+};
+
+const darkTheme: AppTheme = {
   ...createDarkTheme(nightsky),
+  appHeaderFooterBlockSize: '60px',
 };
 
 darkTheme.colorBrandForeground1 = nightsky[80];
 darkTheme.colorBrandForeground2 = nightsky[90];
 
-export { darkTheme, lightTheme };
+const tokens: Record<keyof AppTheme, string> = {
+  ...fluentuiTokens,
+  appHeaderFooterBlockSize: `var(--appHeaderFooterBlockSize)`,
+};
+
+export { darkTheme, lightTheme, tokens };

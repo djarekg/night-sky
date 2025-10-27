@@ -13,6 +13,9 @@
     //   "**/*.{css,html,js,mjs,json,md,scss,ts,tsx,jsx}"
     // ],
 
+    // Maximum number of requests for the chat agent - Prevents AI agents from stopping mid-session
+    "chat.agent.maxRequests": 999,
+
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
 
     "npm.packageManager": "pnpm",
@@ -29,10 +32,12 @@
     "editor.overviewRulerBorder": true,
     "editor.experimentalWhitespaceRendering": "font",
     "editor.renderWhitespace": "none",
+    "editor.insertSpaces": true,
+
+    "debug.javascript.unmapMissingSources": true,
 
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
-    "editor.insertSpaces": true,
 
     "eslint.validate": ["javascript", "typescript", "json", "jsonc", "json5", "html", "css"],
     "[css]": {
@@ -69,19 +74,20 @@
       "editor.defaultFormatter": "redhat.vscode-xml",
     },
 
-    "typescript.experimental.useTsgo": true,
+    // "typescript.experimental.useTsgo": true,
     "typescript.format.semicolons": "insert",
     "javascript.preferences.importModuleSpecifier": "non-relative",
     "javascript.preferences.importModuleSpecifierEnding": "js",
     "typescript.preferences.importModuleSpecifier": "non-relative",
     "typescript.preferences.importModuleSpecifierEnding": "js",
-
-    // "typescript.preferences.importModuleSpecifier": "non-relative",
-    // "typescript.preferences.importModuleSpecifierEnding": "js",
-    // "javascript.preferences.importModuleSpecifier": "non-relative",
-    // "javascript.preferences.importModuleSpecifierEnding": "js",
     "typescript.tsdk": "node_modules/@typescript/native-preview/lib",
     "typescript.reportStyleChecksAsWarnings": false,
+    "typescript.native-preview.tsdk": "node_modules/@typescript/native-preview/lib",
+    "typescript.autoClosingTags": true,
+    "typescript.preferences.autoImportFileExcludePatterns": [],
+    "typescript.preferences.preferTypeOnlyAutoImports": true,
+    "typescript.suggest.autoImports": true,
+    "typescript.suggest.completeFunctionCalls": true,
 
     "html.autoClosingTags": true,
     "html.format.indentInnerHtml": true,
@@ -141,10 +147,15 @@
       "XXLARGE",
     ],
 
-    "workbench.editor.labelFormat": "medium",
+    // Ensure enough terminal history is preserved when running tests.
+    "terminal.integrated.scrollback": 10000,
 
-    // Maximum number of requests for the chat agent - Prevents AI agents from stopping mid-session
-    "chat.agent.maxRequests": 999,
+    // Configure todo-tree to exclude node_modules, dist, and compiled.
+    "todo-tree.filtering.excludeGlobs": ["**/node_modules", "**/dist", "**/compiled"],
+    // Match TODO-APP in addition to other TODOs.
+    "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "[ ]", "[x]", "TODO-APP"],
+
+    "workbench.editor.labelFormat": "medium",
   },
   "extensions": {
     "recommendations": [

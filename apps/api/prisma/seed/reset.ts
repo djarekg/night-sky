@@ -1,4 +1,4 @@
-import type { PrismaClient } from '#app/generated/prisma/client.js';
+import type { PrismaClient } from '#app/generated/prisma/client.ts';
 
 export const reset = async (prisma: PrismaClient) => {
   console.log('Clearing tables...');

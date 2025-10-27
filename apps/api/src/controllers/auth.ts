@@ -48,11 +48,11 @@ export const signin = async (ctx: AuiContext<{ username: string; password: strin
 
   if (isValid) {
     // Credentials are valid, so return a JWT
-    const token = jwt.sign({ username }, TOKEN_SECRET, {
+    jwt.sign({ username }, TOKEN_SECRET, {
       expiresIn: '1h',
     });
 
-    ctx.body = { token, userId: user.id, role: user.userCredential?.role ?? Role.USER };
+    ctx.body = { userId: user.id, role: user.userCredential?.role ?? Role.USER };
     return;
   }
 

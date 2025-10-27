@@ -1,5 +1,5 @@
-import type { PrismaClient } from '#app/generated/prisma/client.js';
-import { Gender } from '#app/generated/prisma/enums.js';
+import type { PrismaClient } from '#app/generated/prisma/client.ts';
+import { Gender } from '#app/generated/prisma/enums.ts';
 import { faker } from './faker-context.ts';
 import { useState } from './state.ts';
 

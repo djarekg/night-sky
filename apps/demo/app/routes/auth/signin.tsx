@@ -1,5 +1,5 @@
 import { ApiStatus } from '@/core/api/api-status.js';
-import { getAuthSession } from '@/core/auth/auth-session.js';
+// import { getAuthSession } from '@/core/auth/auth-session.js';
 import { useAuth } from '@/core/auth/auth.js';
 import { isNullOrEmpty } from '@/core/utils/string.js';
 import { commitSession, getSession } from '@/session.server.js';
@@ -16,48 +16,6 @@ import {
 } from '@fluentui/react-components';
 import { useCallback, useMemo, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react';
 import { redirect, useFetcher, type ActionFunctionArgs } from 'react-router';
-
-const signinFailed: Record<number, string> = {
-  400: 'The username and/or password are required',
-  401: 'The username and/or password is not valid',
-  404: 'The specified user was not found',
-};
-
-export const loader = async ({ request }: ActionFunctionArgs) => {
-  const { isAuthenticated } = await getAuthSession(request);
-
-  if (isAuthenticated) {
-    return redirect('/');
-  }
-
-  return null;
-};
-
-export const action = async ({ request }: ActionFunctionArgs) => {
-  // Extract username from form data.
-  const session = await getSession(request.headers.get('Cookie'));
-  const formData = await request.formData();
-  const userId = formData.get('userId')?.toString();
-  const username = formData.get('username')?.toString();
-  const token = formData.get('token')?.toString();
-
-  // Store the user profile in the session.
-  session.set(
-    'userId',
-    JSON.stringify({
-      userId,
-      username,
-      token,
-    })
-  );
-
-  // Login succeeded, send them to the home page.
-  return redirect('/', {
-    headers: {
-      'Set-Cookie': await commitSession(session),
-    },
-  });
-};
 
 const useStyles = makeStyles({
   form: {
@@ -102,6 +60,36 @@ const useStyles = makeStyles({
   },
 });
 
+const signinFailed: Record<number, string> = {
+  400: 'The username and/or password are required',
+  401: 'The username and/or password is not valid',
+  404: 'The specified user was not found',
+};
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  // Extract username from form data.
+  const session = await getSession(request.headers.get('Cookie'));
+  const formData = await request.formData();
+  const userId = formData.get('userId')?.toString();
+  const username = formData.get('username')?.toString();
+
+  // Store the user profile in the session.
+  session.set(
+    'userId',
+    JSON.stringify({
+      userId,
+      username,
+    })
+  );
+
+  // Login succeeded, send them to the home page.
+  return redirect('/', {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
+  });
+};
+
 export default function Signin() {
   const classes = useStyles();
   const fetcher = useFetcher();
@@ -128,14 +116,13 @@ export default function Signin() {
 
       if (isNullOrEmpty(username) || isNullOrEmpty(password)) return;
 
-      const { statusCode, userId, token } = await signin(username, password);
+      const { statusCode, userId } = await signin(username, password);
 
       // If user credentials are valid, store profile in session cookie
       if (statusCode === ApiStatus.ok) {
         setError(null);
 
         formData.append('userId', userId!);
-        formData.append('token', token!);
 
         // Submit data to server so it can be added to the session cookie
         await fetcher.submit(formData, { method: 'post' });

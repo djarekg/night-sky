@@ -1,1 +1,1 @@
-export * from './search-result-type.js';
+export * from './search-result-type.ts';

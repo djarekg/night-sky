@@ -1,14 +1,14 @@
-import { prisma } from '#app/client/index.js';
-import { createProductColors } from '#prisma/seed/product-color.js';
-import { createProductInventories } from '#prisma/seed/product-inventory.js';
-import { createProductSales } from '#prisma/seed/product-sale.js';
-import { createProducts } from '#prisma/seed/product.js';
-import { reset } from '#prisma/seed/reset.js';
-import { createUserCredential } from '#prisma/seed/user-credential.js';
-import { createCustomerContacts } from './customer-contact.js';
-import { createCustomers } from './customer.js';
+import { prisma } from '#app/client/index.ts';
+import { createProductColors } from '#prisma/seed/product-color.ts';
+import { createProductInventories } from '#prisma/seed/product-inventory.ts';
+import { createProductSales } from '#prisma/seed/product-sale.ts';
+import { createProducts } from '#prisma/seed/product.ts';
+import { reset } from '#prisma/seed/reset.ts';
+import { createUserCredential } from '#prisma/seed/user-credential.ts';
+import { createCustomerContacts } from './customer-contact.ts';
+import { createCustomers } from './customer.ts';
 import { createStates } from './state.ts';
-import { createUsers } from './user.js';
+import { createUsers } from './user.ts';
 
 const load = async () => {
   await reset(prisma);

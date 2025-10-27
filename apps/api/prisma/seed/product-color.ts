@@ -1,4 +1,4 @@
-import { Color, type PrismaClient, ProductType } from '#app/generated/prisma/client.js';
+import { Color, type PrismaClient, ProductType } from '#app/generated/prisma/client.ts';
 
 export const createProductColors = async (prisma: PrismaClient) => {
   console.log('Seeding ProductColor...');

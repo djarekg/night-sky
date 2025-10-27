@@ -31,7 +31,6 @@
     "@types/node": "^24.8.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
-    "@typescript/native-preview": "7.0.0-dev.20251024.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "ts-node": "^10.9.2",
     "vite": "^7.1.10",
@@ -40,6 +39,6 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "peerDependencies": {
-    "@typescript/native-preview": "7.0.0-dev.20251024.1"
+    "typescript": "5.9.3"
   }
 }
