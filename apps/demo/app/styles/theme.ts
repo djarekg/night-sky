@@ -27,6 +27,7 @@ const nightsky: BrandVariants = {
 
 type AppTheme = Theme & {
   appHeaderFooterBlockSize: string;
+  colorBrandForeground0: string;
   colorSecondaryForeground1: string;
   colorSecondaryForeground2: string;
   colorSecondaryForegroundGradient: string;
@@ -35,6 +36,7 @@ type AppTheme = Theme & {
 const lightTheme: AppTheme = {
   ...createLightTheme(nightsky),
   appHeaderFooterBlockSize: '80px',
+  colorBrandForeground0: 'hsla(270, 51%, 32%, 1.00)',
   colorSecondaryForeground1: 'hsla(216, 100%, 58%, 1.00)',
   colorSecondaryForeground2: 'hsla(216, 80%, 48%, 1.00)',
   colorSecondaryForegroundGradient: `
@@ -45,6 +47,7 @@ const lightTheme: AppTheme = {
 const darkTheme: AppTheme = {
   ...createDarkTheme(nightsky),
   appHeaderFooterBlockSize: '80px',
+  colorBrandForeground0: 'hsla(270, 51%, 32%, 1.00)',
   colorSecondaryForeground1: 'hsla(216, 100%, 58%, 1.00)',
   colorSecondaryForeground2: 'hsla(216, 80%, 48%, 1.00)',
   colorSecondaryForegroundGradient: `
@@ -58,6 +61,7 @@ darkTheme.colorBrandForeground2 = nightsky[90];
 const tokens: Record<keyof AppTheme, string> = {
   ...fluentuiTokens,
   appHeaderFooterBlockSize: `var(--appHeaderFooterBlockSize)`,
+  colorBrandForeground0: `var(--colorBrandForeground0)`,
   colorSecondaryForeground1: `var(--colorSecondaryForeground1)`,
   colorSecondaryForeground2: `var(--colorSecondaryForeground2)`,
   colorSecondaryForegroundGradient: `var(--colorSecondaryForegroundGradient)`,

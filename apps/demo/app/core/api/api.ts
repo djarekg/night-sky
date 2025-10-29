@@ -48,6 +48,18 @@ const buildQueryString = (query?: PlainObject) => {
 };
 
 /**
+ * JSON reviver function for handling DTO during JSON.parse.
+ */
+const jsonReviver = (_key: string, value: string) => {
+  // Test for date format and convert to Date type
+  if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(value)) {
+    return new Date(value);
+  }
+
+  return value;
+};
+
+/**
  * Attempt to parse response as JSON, otherwise return text.
  */
 const safeParseResponse = async (res: Response): Promise<unknown> => {
@@ -58,7 +70,7 @@ const safeParseResponse = async (res: Response): Promise<unknown> => {
   }
 
   try {
-    return JSON.parse(text);
+    return JSON.parse(text, jsonReviver);
   } catch {
     return text;
   }

@@ -37,7 +37,7 @@ const useStyles = makeStyles({
   homeLink: {
     display: 'flex',
     gap: '1em',
-    transition: 'color 200ms ease-in',
+    transition: 'color 300ms ease-in, text-shadow 300ms ease-in',
 
     '> .app-icon': {
       transition: 'color 200ms ease-in, transform 300ms ease-in-out',
@@ -45,9 +45,10 @@ const useStyles = makeStyles({
     },
     ':hover': {
       color: tokens.colorBrandForeground1,
+      textShadow: '1px 1px 15px rgba(0, 0, 0, 0.5)',
     },
     '&:hover .app-icon': {
-      color: tokens.colorSecondaryForegroundGradient,
+      color: tokens.colorBrandForeground0,
       transform: 'scale(1.2)',
     },
   },
