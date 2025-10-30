@@ -32,6 +32,7 @@ const useStyles = makeStyles({
     inlineSize: '100%',
     paddingInline: tokens.spacingHorizontalL,
     boxSizing: 'border-box',
+    backdropFilter: 'blur(4px)',
     zIndex: 2,
   },
   homeLink: {

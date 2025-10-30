@@ -51,7 +51,7 @@ const Layout = () => {
         <div className={classes.name}>
           {firstName}&nbsp;{lastName}
         </div>
-        <div className={classes.date}>Date started: {dateCreated?.toLocaleDateString()}</div>
+        <div className={classes.date}>Date created: {dateCreated?.toLocaleDateString()}</div>
       </header>
       <Outlet context={{ user }} />
     </>

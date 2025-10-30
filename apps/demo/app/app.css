@@ -1,16 +1,15 @@
 html,
 body {
+  --_hard-coded-bg: #292929;
+
   margin: 0;
   padding: 0;
   inline-size: 100%;
   block-size: 100%;
-}
-
-html,
-body {
   font-smooth: smooth;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
+  background: var(--_hard-coded-bg);
 }
 
 html {
@@ -45,9 +44,10 @@ html {
   flex-direction: column;
   align-items: center;
   inline-size: 100%;
-  block-size: calc(100vh - (2 * var(--appHeaderFooterBlockSize)));
+  /* block-size: calc(100% - (2 * var(--appHeaderFooterBlockSize))); */
+  block-size: 100%;
   padding-block-start: calc(var(--appHeaderFooterBlockSize) + var(--_padding));
-  /* padding-block-end: var(--_padding); */
+  padding-block-end: calc(var(--appHeaderFooterBlockSize) + var(--_padding));
 }
 
 a {
