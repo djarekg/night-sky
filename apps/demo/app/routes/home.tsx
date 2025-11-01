@@ -1,7 +1,7 @@
-import authMiddleware from '@/core/auth/auth-middleware.js';
-import { makeStyles } from '@fluentui/react-components';
 import { dashboards } from '@/components/dashboards/dashboards.js';
+import authMiddleware from '@/core/auth/auth-middleware.js';
 import { tokens } from '@/styles/theme.js';
+import { makeStyles } from '@fluentui/react-components';
 
 // Protect route with authentication
 export const middleware = [authMiddleware];
@@ -20,12 +20,14 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    blockSize: '150px',
     border: `1px solid ${tokens.colorBrandForeground1}`,
     borderRadius: tokens.borderRadiusXLarge,
     fontSize: tokens.fontSizeBase500,
     boxShadow: tokens.shadow4,
     transition: 'box-shadow 100ms ease-in-out, transform 100ms ease-in-out',
     willChange: 'box-shadow, transform',
+
     '&:hover': {
       boxShadow: tokens.shadow8,
       transform: 'scale(1.01)',

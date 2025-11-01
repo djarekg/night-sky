@@ -1,12 +1,12 @@
 import type { PrismaClient } from '#app/generated/prisma/client.ts';
 import { Gender } from '#app/generated/prisma/enums.ts';
 import { faker } from './faker-context.ts';
-import { useState } from './state.ts';
+import { getState } from './state.ts';
 
 export const createUsers = async (prisma: PrismaClient) => {
   console.log('Seeding User...');
 
-  const { randomStateId } = await useState(prisma);
+  const { randomStateId } = await getState(prisma);
 
   const createAdminUser = () =>
     prisma.user.create({
@@ -21,6 +21,7 @@ export const createUsers = async (prisma: PrismaClient) => {
         stateId: randomStateId(),
         zip: '32084',
         phone: '123-456-7890',
+        jobTitle: 'Administrator',
         isActive: true,
       },
     });
@@ -41,6 +42,9 @@ export const createUsers = async (prisma: PrismaClient) => {
         stateId: randomStateId(),
         zip: faker.location.zipCode({ format: '#####' }),
         phone: faker.phone.number({ style: 'national' }),
+        jobTitle: faker.helpers.fake(
+          '{{person.jobDescriptor}} {{person.jobArea}} {{person.jobType}}'
+        ),
         isActive: faker.datatype.boolean(0.8),
       },
     });
@@ -60,6 +64,9 @@ export const createUsers = async (prisma: PrismaClient) => {
         stateId: randomStateId(),
         zip: faker.location.zipCode({ format: '#####' }),
         phone: faker.phone.number({ style: 'national' }),
+        jobTitle: faker.helpers.fake(
+          '{{person.jobDescriptor}} {{person.jobArea}} {{person.jobType}}'
+        ),
         isActive: faker.datatype.boolean(0.8),
       },
     });
@@ -78,6 +85,9 @@ export const createUsers = async (prisma: PrismaClient) => {
         stateId: randomStateId(),
         zip: faker.location.zipCode({ format: '#####' }),
         phone: faker.phone.number({ style: 'national' }),
+        jobTitle: faker.helpers.fake(
+          '{{person.jobDescriptor}} {{person.jobArea}} {{person.jobType}}'
+        ),
         isActive: faker.datatype.boolean(0.8),
       },
     });

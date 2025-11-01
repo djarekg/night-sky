@@ -7,14 +7,12 @@ export default [
   route('signin', 'routes/auth/signin.tsx'),
   route('signout', 'routes/auth/signout.tsx'),
   route('signup', 'routes/auth/signup.tsx'),
+  route('change-password', 'routes/auth/change-password.tsx'),
   route('forgot-password', 'routes/auth/forgot-password.tsx'),
   ...prefix('users', [
     index('routes/users/users.tsx'),
     ...prefix(':id', [
-      layout('routes/users/[id]/layout.tsx', [
-        index('routes/users/[id]/user.tsx'),
-        route('settings', 'routes/users/[id]/settings.tsx'),
-      ]),
+      layout('routes/users/[id]/layout.tsx', [index('routes/users/[id]/user.tsx')]),
     ]),
   ]),
 ] satisfies RouteConfig;

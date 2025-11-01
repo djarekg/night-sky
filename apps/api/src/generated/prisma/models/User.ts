@@ -35,6 +35,7 @@ export type UserMinAggregateOutputType = {
   stateId: string | null
   zip: string | null
   phone: string | null
+  jobTitle: string | null
   isActive: boolean | null
   dateCreated: Date | null
 }
@@ -51,6 +52,7 @@ export type UserMaxAggregateOutputType = {
   stateId: string | null
   zip: string | null
   phone: string | null
+  jobTitle: string | null
   isActive: boolean | null
   dateCreated: Date | null
 }
@@ -67,6 +69,7 @@ export type UserCountAggregateOutputType = {
   stateId: number
   zip: number
   phone: number
+  jobTitle: number
   isActive: number
   dateCreated: number
   _all: number
@@ -85,6 +88,7 @@ export type UserMinAggregateInputType = {
   stateId?: true
   zip?: true
   phone?: true
+  jobTitle?: true
   isActive?: true
   dateCreated?: true
 }
@@ -101,6 +105,7 @@ export type UserMaxAggregateInputType = {
   stateId?: true
   zip?: true
   phone?: true
+  jobTitle?: true
   isActive?: true
   dateCreated?: true
 }
@@ -117,6 +122,7 @@ export type UserCountAggregateInputType = {
   stateId?: true
   zip?: true
   phone?: true
+  jobTitle?: true
   isActive?: true
   dateCreated?: true
   _all?: true
@@ -206,6 +212,7 @@ export type UserGroupByOutputType = {
   stateId: string
   zip: string
   phone: string
+  jobTitle: string
   isActive: boolean
   dateCreated: Date
   _count: UserCountAggregateOutputType | null
@@ -243,6 +250,7 @@ export type UserWhereInput = {
   stateId?: Prisma.StringFilter<"User"> | string
   zip?: Prisma.StringFilter<"User"> | string
   phone?: Prisma.StringFilter<"User"> | string
+  jobTitle?: Prisma.StringFilter<"User"> | string
   isActive?: Prisma.BoolFilter<"User"> | boolean
   dateCreated?: Prisma.DateTimeFilter<"User"> | Date | string
   state?: Prisma.XOR<Prisma.StateScalarRelationFilter, Prisma.StateWhereInput>
@@ -262,6 +270,7 @@ export type UserOrderByWithRelationInput = {
   stateId?: Prisma.SortOrder
   zip?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  jobTitle?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   dateCreated?: Prisma.SortOrder
   state?: Prisma.StateOrderByWithRelationInput
@@ -285,6 +294,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   stateId?: Prisma.StringFilter<"User"> | string
   zip?: Prisma.StringFilter<"User"> | string
   phone?: Prisma.StringFilter<"User"> | string
+  jobTitle?: Prisma.StringFilter<"User"> | string
   isActive?: Prisma.BoolFilter<"User"> | boolean
   dateCreated?: Prisma.DateTimeFilter<"User"> | Date | string
   state?: Prisma.XOR<Prisma.StateScalarRelationFilter, Prisma.StateWhereInput>
@@ -304,6 +314,7 @@ export type UserOrderByWithAggregationInput = {
   stateId?: Prisma.SortOrder
   zip?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  jobTitle?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   dateCreated?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -326,6 +337,7 @@ export type UserScalarWhereWithAggregatesInput = {
   stateId?: Prisma.StringWithAggregatesFilter<"User"> | string
   zip?: Prisma.StringWithAggregatesFilter<"User"> | string
   phone?: Prisma.StringWithAggregatesFilter<"User"> | string
+  jobTitle?: Prisma.StringWithAggregatesFilter<"User"> | string
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   dateCreated?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -341,6 +353,7 @@ export type UserCreateInput = {
   city: string
   zip: string
   phone: string
+  jobTitle: string
   isActive?: boolean
   dateCreated?: Date | string
   state: Prisma.StateCreateNestedOneWithoutUserInput
@@ -360,6 +373,7 @@ export type UserUncheckedCreateInput = {
   stateId: string
   zip: string
   phone: string
+  jobTitle: string
   isActive?: boolean
   dateCreated?: Date | string
   productSales?: Prisma.ProductSaleUncheckedCreateNestedManyWithoutUserInput
@@ -377,6 +391,7 @@ export type UserUpdateInput = {
   city?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  jobTitle?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dateCreated?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state?: Prisma.StateUpdateOneRequiredWithoutUserNestedInput
@@ -396,6 +411,7 @@ export type UserUncheckedUpdateInput = {
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  jobTitle?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dateCreated?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   productSales?: Prisma.ProductSaleUncheckedUpdateManyWithoutUserNestedInput
@@ -414,6 +430,7 @@ export type UserCreateManyInput = {
   stateId: string
   zip: string
   phone: string
+  jobTitle: string
   isActive?: boolean
   dateCreated?: Date | string
 }
@@ -429,6 +446,7 @@ export type UserUpdateManyMutationInput = {
   city?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  jobTitle?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dateCreated?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -445,6 +463,7 @@ export type UserUncheckedUpdateManyInput = {
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  jobTitle?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dateCreated?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -477,6 +496,7 @@ export type UserCountOrderByAggregateInput = {
   stateId?: Prisma.SortOrder
   zip?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  jobTitle?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   dateCreated?: Prisma.SortOrder
 }
@@ -493,6 +513,7 @@ export type UserMaxOrderByAggregateInput = {
   stateId?: Prisma.SortOrder
   zip?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  jobTitle?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   dateCreated?: Prisma.SortOrder
 }
@@ -509,6 +530,7 @@ export type UserMinOrderByAggregateInput = {
   stateId?: Prisma.SortOrder
   zip?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  jobTitle?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   dateCreated?: Prisma.SortOrder
 }
@@ -615,6 +637,7 @@ export type UserCreateWithoutStateInput = {
   city: string
   zip: string
   phone: string
+  jobTitle: string
   isActive?: boolean
   dateCreated?: Date | string
   productSales?: Prisma.ProductSaleCreateNestedManyWithoutUserInput
@@ -632,6 +655,7 @@ export type UserUncheckedCreateWithoutStateInput = {
   city: string
   zip: string
   phone: string
+  jobTitle: string
   isActive?: boolean
   dateCreated?: Date | string
   productSales?: Prisma.ProductSaleUncheckedCreateNestedManyWithoutUserInput
@@ -679,6 +703,7 @@ export type UserScalarWhereInput = {
   stateId?: Prisma.StringFilter<"User"> | string
   zip?: Prisma.StringFilter<"User"> | string
   phone?: Prisma.StringFilter<"User"> | string
+  jobTitle?: Prisma.StringFilter<"User"> | string
   isActive?: Prisma.BoolFilter<"User"> | boolean
   dateCreated?: Prisma.DateTimeFilter<"User"> | Date | string
 }
@@ -694,6 +719,7 @@ export type UserCreateWithoutUserCredentialInput = {
   city: string
   zip: string
   phone: string
+  jobTitle: string
   isActive?: boolean
   dateCreated?: Date | string
   state: Prisma.StateCreateNestedOneWithoutUserInput
@@ -712,6 +738,7 @@ export type UserUncheckedCreateWithoutUserCredentialInput = {
   stateId: string
   zip: string
   phone: string
+  jobTitle: string
   isActive?: boolean
   dateCreated?: Date | string
   productSales?: Prisma.ProductSaleUncheckedCreateNestedManyWithoutUserInput
@@ -744,6 +771,7 @@ export type UserUpdateWithoutUserCredentialInput = {
   city?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  jobTitle?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dateCreated?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state?: Prisma.StateUpdateOneRequiredWithoutUserNestedInput
@@ -762,6 +790,7 @@ export type UserUncheckedUpdateWithoutUserCredentialInput = {
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  jobTitle?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dateCreated?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   productSales?: Prisma.ProductSaleUncheckedUpdateManyWithoutUserNestedInput
@@ -778,6 +807,7 @@ export type UserCreateWithoutProductSalesInput = {
   city: string
   zip: string
   phone: string
+  jobTitle: string
   isActive?: boolean
   dateCreated?: Date | string
   state: Prisma.StateCreateNestedOneWithoutUserInput
@@ -796,6 +826,7 @@ export type UserUncheckedCreateWithoutProductSalesInput = {
   stateId: string
   zip: string
   phone: string
+  jobTitle: string
   isActive?: boolean
   dateCreated?: Date | string
   userCredential?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
@@ -828,6 +859,7 @@ export type UserUpdateWithoutProductSalesInput = {
   city?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  jobTitle?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dateCreated?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state?: Prisma.StateUpdateOneRequiredWithoutUserNestedInput
@@ -846,6 +878,7 @@ export type UserUncheckedUpdateWithoutProductSalesInput = {
   stateId?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  jobTitle?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dateCreated?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userCredential?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
@@ -862,6 +895,7 @@ export type UserCreateManyStateInput = {
   city: string
   zip: string
   phone: string
+  jobTitle: string
   isActive?: boolean
   dateCreated?: Date | string
 }
@@ -877,6 +911,7 @@ export type UserUpdateWithoutStateInput = {
   city?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  jobTitle?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dateCreated?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   productSales?: Prisma.ProductSaleUpdateManyWithoutUserNestedInput
@@ -894,6 +929,7 @@ export type UserUncheckedUpdateWithoutStateInput = {
   city?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  jobTitle?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dateCreated?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   productSales?: Prisma.ProductSaleUncheckedUpdateManyWithoutUserNestedInput
@@ -911,6 +947,7 @@ export type UserUncheckedUpdateManyWithoutStateInput = {
   city?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  jobTitle?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dateCreated?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -958,6 +995,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   stateId?: boolean
   zip?: boolean
   phone?: boolean
+  jobTitle?: boolean
   isActive?: boolean
   dateCreated?: boolean
   state?: boolean | Prisma.StateDefaultArgs<ExtArgs>
@@ -978,6 +1016,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   stateId?: boolean
   zip?: boolean
   phone?: boolean
+  jobTitle?: boolean
   isActive?: boolean
   dateCreated?: boolean
   state?: boolean | Prisma.StateDefaultArgs<ExtArgs>
@@ -995,6 +1034,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   stateId?: boolean
   zip?: boolean
   phone?: boolean
+  jobTitle?: boolean
   isActive?: boolean
   dateCreated?: boolean
   state?: boolean | Prisma.StateDefaultArgs<ExtArgs>
@@ -1012,11 +1052,12 @@ export type UserSelectScalar = {
   stateId?: boolean
   zip?: boolean
   phone?: boolean
+  jobTitle?: boolean
   isActive?: boolean
   dateCreated?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "gender" | "email" | "streetAddress" | "streetAddress2" | "city" | "stateId" | "zip" | "phone" | "isActive" | "dateCreated", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "gender" | "email" | "streetAddress" | "streetAddress2" | "city" | "stateId" | "zip" | "phone" | "jobTitle" | "isActive" | "dateCreated", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   state?: boolean | Prisma.StateDefaultArgs<ExtArgs>
   productSales?: boolean | Prisma.User$productSalesArgs<ExtArgs>
@@ -1049,6 +1090,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     stateId: string
     zip: string
     phone: string
+    jobTitle: string
     isActive: boolean
     dateCreated: Date
   }, ExtArgs["result"]["user"]>
@@ -1488,6 +1530,7 @@ export interface UserFieldRefs {
   readonly stateId: Prisma.FieldRef<"User", 'String'>
   readonly zip: Prisma.FieldRef<"User", 'String'>
   readonly phone: Prisma.FieldRef<"User", 'String'>
+  readonly jobTitle: Prisma.FieldRef<"User", 'String'>
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly dateCreated: Prisma.FieldRef<"User", 'DateTime'>
 }

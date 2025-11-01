@@ -1,12 +1,12 @@
 import { tokens } from '@/styles/theme.js';
 import { makeStyles } from '@fluentui/react-components';
-import type { CSSProperties, FC, HTMLAttributes } from 'react';
+import type { CSSProperties, FC, PropsWithChildren } from 'react';
 
 const useStyles = makeStyles({
   section: {
     display: 'flex',
     flexDirection: 'column',
-    border: `1px solid ${tokens.colorNeutralStroke1}`,
+    // border: `1px solid ${tokens.colorNeutralStroke1}`,
     borderRadius: tokens.borderRadiusXLarge,
     boxShadow: tokens.shadow8,
     background: tokens.colorNeutralCardBackground,
@@ -34,7 +34,7 @@ type FormCardProps = {
   title?: string;
   layout?: 'flex' | 'grid';
   cols?: number;
-} & HTMLAttributes<HTMLDivElement>;
+} & PropsWithChildren;
 
 const FormCard: FC<FormCardProps> = ({ children, title, layout = 'flex', cols }) => {
   const classes = useStyles();

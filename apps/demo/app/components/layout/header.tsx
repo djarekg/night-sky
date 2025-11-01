@@ -69,7 +69,6 @@ const Header = () => {
   const classes = useStyles();
   const navigate = useNavigate();
   const { userId } = useLoaderData<typeof loader>();
-  const settingsPath = `/users/${userId}/settings`;
 
   const handleLink = (e: MouseEvent, href: string) => {
     e.preventDefault();
@@ -103,7 +102,7 @@ const Header = () => {
             <MenuItemLink
               href="#"
               icon={<SettingsIcon />}
-              onClick={e => handleLink(e, settingsPath)}>
+              onClick={e => handleLink(e, `/users/${userId}`)}>
               Profile
             </MenuItemLink>
             <MenuItemLink

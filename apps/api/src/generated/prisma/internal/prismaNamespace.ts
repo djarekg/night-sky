@@ -1143,6 +1143,7 @@ export const UserScalarFieldEnum = {
   stateId: 'stateId',
   zip: 'zip',
   phone: 'phone',
+  jobTitle: 'jobTitle',
   isActive: 'isActive',
   dateCreated: 'dateCreated'
 } as const
@@ -1292,7 +1293,8 @@ export const UserOrderByRelevanceFieldEnum = {
   city: 'city',
   stateId: 'stateId',
   zip: 'zip',
-  phone: 'phone'
+  phone: 'phone',
+  jobTitle: 'jobTitle'
 } as const
 
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]

@@ -2,9 +2,9 @@ import type { ApiError } from '@/core/api/api-error.js';
 import { ApiStatus } from '@/core/api/api-status.js';
 import type { AuthModel, SigninModel } from '@/core/auth/auth.model.js';
 import authService from '@/core/auth/auth.service.js';
+import safeSessionStorage from '@/core/utils/session-storage.js';
 import { isNullOrEmpty } from '@/core/utils/string.js';
 import { createContext, use, useState, type ReactNode } from 'react';
-import safeSessionStorage from '@/core/utils/session-storage.js';
 
 type AuthProvider = {
   /**

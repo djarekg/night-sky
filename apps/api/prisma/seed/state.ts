@@ -69,7 +69,7 @@ export const createStates = async (prisma: PrismaClient) => {
   await createState();
 };
 
-export const useState = async (prisma: PrismaClient) => {
+export const getState = async (prisma: PrismaClient) => {
   const states: { id: string }[] = await prisma.state.findMany({
     select: {
       id: true,

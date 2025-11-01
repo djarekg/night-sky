@@ -28,6 +28,7 @@ const useStyles = makeStyles({
     background: tokens.colorNeutralCardBackground,
     borderRadius: tokens.borderRadiusLarge,
     boxShadow: tokens.shadow4,
+    zIndex: 2,
   },
   header: {
     display: 'flex',
@@ -57,6 +58,17 @@ const useStyles = makeStyles({
     '> .fui-Link': {
       marginInlineStart: '8px',
     },
+  },
+  background: {
+    position: 'absolute',
+    inset: 0,
+    blockSize: '100%',
+    inlineSize: '100%',
+    backgroundImage: 'url(../../public/wave3.png)',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    opacity: '0.7',
+    zIndex: 1,
   },
 });
 
@@ -150,53 +162,56 @@ export default function Signin() {
   }, [error]);
 
   return (
-    <fetcher.Form
-      ref={formRef}
-      className={classes.form}>
-      <header className={classes.header}>Login</header>
+    <>
+      <div className={classes.background}></div>
+      <fetcher.Form
+        ref={formRef}
+        className={classes.form}>
+        <header className={classes.header}>Login</header>
 
-      <section className={classes.message}>{error && renderError}</section>
+        <section className={classes.message}>{error && renderError}</section>
 
-      <section className={classes.inputs}>
-        <Field
-          label="Username"
-          required>
-          <Input
-            name="username"
-            onKeyDown={handleEnterKey}
-          />
-        </Field>
+        <section className={classes.inputs}>
+          <Field
+            label="Username"
+            required>
+            <Input
+              name="username"
+              onKeyDown={handleEnterKey}
+            />
+          </Field>
 
-        <Field
-          required
-          label="Password"
-          hint={<Link href="/forgot-password">Forgot password?</Link>}>
-          <Input
-            name="password"
-            type="password"
-            autoComplete="off"
-            onKeyDown={handleEnterKey}
-          />
-        </Field>
-      </section>
+          <Field
+            required
+            label="Password"
+            hint={<Link href="/forgot-password">Forgot password?</Link>}>
+            <Input
+              name="password"
+              type="password"
+              autoComplete="off"
+              onKeyDown={handleEnterKey}
+            />
+          </Field>
+        </section>
 
-      <footer className={classes.footer}>
-        <Button
-          appearance="primary"
-          disabled={isAuthenticating}
-          onClick={handleSignin}>
-          Sign In
-        </Button>
+        <footer className={classes.footer}>
+          <Button
+            appearance="primary"
+            disabled={isAuthenticating}
+            onClick={handleSignin}>
+            Sign In
+          </Button>
 
-        <span className={classes.createAccount}>
-          Don't have an account?
-          <Link
-            inline
-            href="/signup">
-            Create new
-          </Link>
-        </span>
-      </footer>
-    </fetcher.Form>
+          <span className={classes.createAccount}>
+            Don't have an account?
+            <Link
+              inline
+              href="/signup">
+              Create new
+            </Link>
+          </span>
+        </footer>
+      </fetcher.Form>
+    </>
   );
 }

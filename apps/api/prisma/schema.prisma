@@ -92,6 +92,7 @@ model User {
   stateId        String
   zip            String
   phone          String
+  jobTitle       String
   isActive       Boolean         @default(false)
   dateCreated    DateTime        @default(now())
   state          State           @relation(fields: [stateId], references: [id])
