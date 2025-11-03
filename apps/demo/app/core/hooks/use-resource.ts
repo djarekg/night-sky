@@ -48,12 +48,14 @@ type UseResourceResultNullable<T> = {
   data: T | null;
   error: Error | null;
   loading: boolean;
+  reload: () => void;
 };
 
 type UseResourceResultNonNull<T> = {
   data: T;
   error: Error | null;
   loading: boolean;
+  reload: () => void;
 };
 
 /**
@@ -92,16 +94,23 @@ export function useResource<T, P>(
   deps: unknown[] = []
 ): UseResourceResultNullable<T> | UseResourceResultNonNull<T> {
   // At runtime we store state as T | null (covers both flows).
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const hasDefault = (options as any).defaultValue !== undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaultValue = (options as any).defaultValue as T | undefined;
 
   const [data, setData] = useState<T | null>(hasDefault ? (defaultValue as T) : null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
+  const [reloadCount, setReloadCount] = useState(0);
 
   // request id to avoid race conditions - only latest request writes state
   const reqIdRef = useRef(0);
   const mountedRef = useRef(true);
+
+  const reload = () => {
+    setReloadCount(count => count + 1);
+  };
 
   useEffect(() => {
     mountedRef.current = true;
@@ -154,6 +163,7 @@ export function useResource<T, P>(
         if (!mountedRef.current || reqIdRef.current !== currentReq) return;
         setError(err instanceof Error ? err : new Error(String(err)));
       } finally {
+        // eslint-disable-next-line no-unsafe-finally
         if (!mountedRef.current || reqIdRef.current !== currentReq) return;
         setLoading(false);
       }
@@ -166,8 +176,7 @@ export function useResource<T, P>(
     // - params identity
     // - explicit deps provided by caller (deps array argument)
     // We intentionally read the functions via (options as any) to ensure we depend on their identity.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [(options as any).loader, (options as any).params, ...deps]);
+  }, [options, hasDefault, defaultValue, reloadCount, ...deps]);
 
   // Narrow the return type according to whether defaultValue was provided.
   if (hasDefault) {
@@ -175,6 +184,7 @@ export function useResource<T, P>(
       data: data as T, // safe: when hasDefault true we always set data to defaultValue at minimum
       error,
       loading,
+      reload,
     } as UseResourceResultNonNull<T>;
   }
 
@@ -182,5 +192,6 @@ export function useResource<T, P>(
     data,
     error,
     loading,
+    reload,
   } as UseResourceResultNullable<T>;
 }

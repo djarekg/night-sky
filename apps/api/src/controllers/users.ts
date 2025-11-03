@@ -38,6 +38,7 @@ export const updateUser = async (ctx: Context) => {
     params: { id },
     request,
   } = ctx;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const data = (request as any).body as UserModel;
 
   try {
@@ -56,8 +57,35 @@ export const updateUser = async (ctx: Context) => {
   }
 };
 
+export const updateUserActive = async (ctx: Context) => {
+  const {
+    params: { id },
+    request,
+  } = ctx;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { isActive } = (request as any).body as { isActive: boolean };
+
+  try {
+    const user = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        isActive,
+      },
+    });
+
+    ctx.body = user;
+  } catch (err) {
+    ctx.status = 500;
+    ctx.body = { error: `Failed to update active status for user id: ${id}` };
+    console.error(`Failed to update active status for user id: ${id}`, err);
+  }
+};
+
 export const createUser = async (ctx: Context) => {
   const { request } = ctx;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const data = (request as any).body as UserModel;
 
   try {

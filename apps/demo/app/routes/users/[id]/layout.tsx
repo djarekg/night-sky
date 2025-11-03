@@ -1,12 +1,12 @@
 import { useResource } from '@/core/hooks/use-resource.js';
-import { userService } from '@/core/services/user.js';
+import { getUser, updateUserActive } from '@/core/services/user.service.js';
+import LayoutSkeleton from '@/routes/users/[id]/layout-skeleton.js';
 import { tokens } from '@/styles/theme.js';
 import { Avatar, Link, makeStyles } from '@fluentui/react-components';
 import { type UserModel } from '@ns/api';
-import { lazy } from 'react';
+import { lazy, Suspense, useCallback } from 'react';
 import { Outlet, useParams } from 'react-router';
 
-const Loader = lazy(() => import('@/components/loader/loader.js'));
 const ErrorNotifier = lazy(() => import('@/components/error-notifier/error-notifier.js'));
 
 const useStyles = makeStyles({
@@ -18,7 +18,6 @@ const useStyles = makeStyles({
     paddingBlock: '15px',
     paddingInline: '15px',
     boxSizing: 'border-box',
-    // border: `1px solid ${tokens.colorNeutralStroke1}`,
     borderRadius: tokens.borderRadiusLarge,
     boxShadow: tokens.shadow8,
     backgroundColor: tokens.colorNeutralCardBackground,
@@ -34,15 +33,17 @@ const useStyles = makeStyles({
   rightSide: {
     display: 'flex',
     flexDirection: 'column',
-    // justifyContent: 'space-between',
     gap: '1rem',
     alignItems: 'end',
     marginInlineStart: 'auto',
   },
   date: {
     fontsize: tokens.fontSizeBase500,
-    // fontSize: '18px',
     color: tokens.colorNeutralForeground3,
+  },
+  links: {
+    display: 'flex',
+    gap: '2rem',
   },
 });
 
@@ -52,25 +53,29 @@ const Layout = () => {
   const {
     data: user,
     error,
-    loading,
+    reload,
   } = useResource({
     defaultValue: {} as UserModel,
     params: () => id,
-    loader: params => userService.getUser(params),
+    loader: id => getUser(id),
   });
-
-  if (loading) return <Loader />;
-  if (error) return <ErrorNotifier message={error.message} />;
-
   const { firstName, lastName, dateCreated, jobTitle, isActive } = user!;
 
+  const handleUserActiveToggle = useCallback(async () => {
+    await updateUserActive(id, !isActive);
+    reload();
+  }, [id, isActive, reload]);
+
+  if (error) return <ErrorNotifier message={error.message} />;
+
   return (
-    <>
+    <Suspense fallback={<LayoutSkeleton />}>
       <header className={classes.header}>
         <Avatar
           aria-label="User avatar"
           activeAppearance="ring"
           size={40}
+          color={isActive !== false ? 'neutral' : 'dark-red'}
           active={`${isActive ? 'active' : 'inactive'}`}
         />
         <section>
@@ -81,11 +86,16 @@ const Layout = () => {
         </section>
         <div className={classes.rightSide}>
           <div className={classes.date}>Created: {dateCreated?.toLocaleDateString()}</div>
-          <Link href="/auth/change-password">Change password</Link>
+          <div className={classes.links}>
+            <Link onClick={handleUserActiveToggle}>
+              {isActive ? 'Deactivate user' : 'Activate user'}
+            </Link>
+            <Link href="/auth/change-password">Change password</Link>
+          </div>
         </div>
       </header>
       <Outlet context={{ user }} />
-    </>
+    </Suspense>
   );
 };
 
