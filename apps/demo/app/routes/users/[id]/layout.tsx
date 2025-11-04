@@ -18,9 +18,9 @@ const useStyles = makeStyles({
     paddingBlock: '15px',
     paddingInline: '15px',
     boxSizing: 'border-box',
-    borderRadius: tokens.borderRadiusLarge,
-    boxShadow: tokens.shadow8,
-    backgroundColor: tokens.colorNeutralCardBackground,
+    // borderRadius: tokens.borderRadiusLarge,
+    // boxShadow: tokens.shadow8,
+    // backgroundColor: tokens.colorNeutralCardBackground,
     marginBlockEnd: tokens.spacingVerticalXL,
   },
   name: {

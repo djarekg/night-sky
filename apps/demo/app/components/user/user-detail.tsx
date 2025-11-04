@@ -2,17 +2,10 @@ import FormCard from '@/components/form-card/form-card.js';
 import ContactIcon from '@/components/icons/contact.js';
 import MapIcon from '@/components/icons/map.js';
 import UserDetailSkeleton from '@/components/user/user-detail-skeleton.js';
-import {
-  Button,
-  Dropdown,
-  Field,
-  Input,
-  makeStyles,
-  Option,
-  tokens,
-} from '@fluentui/react-components';
+import { tokens } from '@/styles/theme.js';
+import { Button, Dropdown, Field, Input, makeStyles, Option } from '@fluentui/react-components';
 import { Gender, type UserModel } from '@ns/api';
-import { type ChangeEvent, type FC, Suspense, useState } from 'react';
+import { type ChangeEvent, type FC, Suspense, useEffect, useState } from 'react';
 import { useFetcher } from 'react-router';
 
 const useStyles = makeStyles({
@@ -38,10 +31,11 @@ type UserDetailProps = {
   onChange?: (user: UserModel) => void;
 };
 
-const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
+const UserDetail: FC<UserDetailProps> = ({ user = {} as UserModel, onChange }) => {
   const classes = useStyles();
   const fetcher = useFetcher();
   const [userClone, setUserClone] = useState(user);
+  const [isDirty, setIsDirty] = useState(false);
 
   const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = target;
@@ -54,6 +48,10 @@ const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
     onChange?.(userClone);
   };
 
+  useEffect(() => {
+    setIsDirty(JSON.stringify(user) !== JSON.stringify(userClone));
+  }, [userClone]);
+
   return (
     <Suspense fallback={<UserDetailSkeleton />}>
       <fetcher.Form className={classes.form}>
@@ -64,7 +62,7 @@ const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
               size={36}
               strokeWidth={1}
               strokeColor={tokens.colorNeutralCardBackground}
-              fill="white"
+              fill={tokens.colorNeutralForegroundOnBrand}
             />
           }
           layout="grid"
@@ -74,7 +72,7 @@ const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
             required>
             <Input
               name="firstName"
-              value={user.firstName}
+              value={user.firstName ?? ''}
               onChange={handleInputChange}
             />
           </Field>
@@ -83,7 +81,7 @@ const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
             required>
             <Input
               name="lastName"
-              value={user.lastName}
+              value={user.lastName ?? ''}
               onChange={handleInputChange}
             />
           </Field>
@@ -93,7 +91,7 @@ const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
             <Input
               name="email"
               type="email"
-              value={user.email}
+              value={user.email ?? ''}
               onChange={handleInputChange}
             />
           </Field>
@@ -103,7 +101,7 @@ const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
             <Input
               name="phone"
               type="tel"
-              value={user.phone}
+              value={user.phone ?? ''}
               onChange={handleInputChange}
             />
           </Field>
@@ -113,7 +111,7 @@ const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
             <Dropdown
               name="gender"
               placeholder="Select gender"
-              value={user.gender}>
+              value={user.gender ?? ''}>
               {Object.keys(Gender).map(g => (
                 <Option
                   key={g}
@@ -130,7 +128,7 @@ const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
           icon={
             <MapIcon
               size={36}
-              fill="white"
+              fill={tokens.colorNeutralForegroundOnBrand}
             />
           }>
           <Field
@@ -138,14 +136,14 @@ const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
             required>
             <Input
               name="streetAddress"
-              value={user.streetAddress}
+              value={user.streetAddress ?? ''}
               onChange={handleInputChange}
             />
           </Field>
           <Field label="Street address 2">
             <Input
               name="streetAddress2"
-              value={user.streetAddress2!}
+              value={user.streetAddress2! ?? ''}
               onChange={handleInputChange}
             />
           </Field>
@@ -156,7 +154,7 @@ const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
               required>
               <Input
                 name="city"
-                value={user.city}
+                value={user.city ?? ''}
                 onChange={handleInputChange}
               />
             </Field>
@@ -166,7 +164,7 @@ const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
               {/* <Dropdown placeholder="Select state"></Dropdown> */}
               <Input
                 name="stateId"
-                value={user.stateId}
+                value={user.stateId ?? ''}
                 onChange={handleInputChange}
               />
             </Field>
@@ -175,7 +173,7 @@ const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
               required>
               <Input
                 name="zip"
-                value={user.zip!}
+                value={user.zip! ?? ''}
                 onChange={handleInputChange}
               />
             </Field>
@@ -183,7 +181,7 @@ const UserDetail: FC<UserDetailProps> = ({ user, onChange }) => {
         </FormCard>
 
         <footer className={classes.actions}>
-          <Button>Save</Button>
+          <Button disabled={!isDirty}>Save</Button>
         </footer>
       </fetcher.Form>
     </Suspense>
