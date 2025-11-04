@@ -45,6 +45,10 @@ const useStyles = makeStyles({
     display: 'flex',
     gap: '2rem',
   },
+  disabled: {
+    color: tokens.colorPaletteRedForeground1,
+    marginInlineStart: tokens.spacingHorizontalS,
+  },
 });
 
 const Layout = () => {
@@ -81,6 +85,7 @@ const Layout = () => {
         <section>
           <div className={classes.name}>
             {firstName}&nbsp;{lastName}
+            {!isActive && <span className={classes.disabled}>(disabled)</span>}
           </div>
           <div className={classes.title}>{jobTitle}</div>
         </section>
