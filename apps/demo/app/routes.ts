@@ -15,4 +15,10 @@ export default [
       layout('routes/users/[id]/layout.tsx', [index('routes/users/[id]/user.tsx')]),
     ]),
   ]),
+  ...prefix('products', [
+    index('routes/products/products.tsx'),
+    ...prefix(':id', [
+      layout('routes/products/[id]/layout.tsx', [index('routes/products/[id]/product.tsx')]),
+    ]),
+  ]),
 ] satisfies RouteConfig;
